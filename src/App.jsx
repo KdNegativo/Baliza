@@ -10,45 +10,42 @@ const MAPS_DIR = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_COOR
 const MAPS_EMBED = `https://maps.google.com/maps?q=${MAPS_COORDS}&hl=pt-BR&z=18&ie=UTF8&iwloc=B&output=embed`
 
 const navLinks = [
-  ['Serviços', '#servicos'],
-  ['Diagnóstico', '#diagnostico'],
-  ['Processo', '#processo'],
-  ['Bancada', '#responsavel'],
+  ['Orçamento', '#orcamento'],
+  ['Reparos', '#servicos'],
   ['Contato', '#contato'],
 ]
 
 const services = [
   {
-    title: 'Eletrônica e controladora',
-    desc: 'Análise de placa, chicote, sensores, conectores, trilhas e componentes antes de recomendar troca completa.',
-    items: ['MOSFET', 'capacitores', 'sensor Hall', 'conectores'],
+    title: 'Patinete não liga ou falha',
+    desc: 'Triagem de bateria, painel, chicote, controladora e conectores para entender a causa antes de trocar peça.',
+    items: ['não liga', 'desliga sozinho', 'erro no painel'],
     visual: 'board',
-    meta: 'sinal, placa e chicote',
+    meta: 'elétrica e comando',
     accent: 'green',
   },
   {
-    title: 'Bateria, BMS e carregamento',
-    desc: 'Teste de tensão por grupo, avaliação de BMS, conectores, carregador e perda de autonomia.',
-    items: ['36V a 52V', 'BMS', 'balanceamento', 'carga'],
+    title: 'Bateria fraca ou sem carga',
+    desc: 'Verificação de carregador, BMS, conectores e queda de tensão para indicar o melhor caminho.',
+    items: ['não carrega', 'autonomia baixa', 'queda de tensão'],
     visual: 'battery',
-    meta: 'autonomia e proteção',
+    meta: 'bateria e carga',
     accent: 'amber',
   },
   {
-    title: 'Freio, pneu e mecânica',
-    desc: 'Correção de folga, vibração, freio raspando, rolamentos e conjunto de roda/motor.',
-    items: ['freio a disco', 'pneu', 'rolamento', 'mastro'],
+    title: 'Barulho, freio ou pneu',
+    desc: 'Ajuste mecânico, freio raspando, pneu, rolamento, folga e conjunto de roda/motor.',
+    items: ['freio', 'pneu', 'rolamento'],
     visual: 'wheel',
-    meta: 'rodagem e segurança',
+    meta: 'rodagem',
     accent: 'clay',
   },
 ]
 
 const labModules = [
-  ['Entrada', 'Modelo, sintoma, foto e histórico do defeito antes de marcar a avaliação.'],
-  ['Bancada', 'Medição elétrica, inspeção visual, teste de comandos e causa provável.'],
-  ['Decisão', 'Orçamento claro: reparar, substituir, aguardar peça ou não compensar.'],
-  ['Entrega', 'Teste funcional e orientação de uso para evitar retorno do mesmo problema.'],
+  ['Modelo', 'Marca, modelo ou uma foto do patinete.'],
+  ['Sintoma', 'O que aconteceu: não liga, não carrega, freio, erro, barulho ou queda de autonomia.'],
+  ['Foto ou vídeo', 'Uma foto do painel e um vídeo curto mostrando o defeito já ajudam muito.'],
 ]
 
 const process = [
@@ -185,7 +182,7 @@ function Header() {
 
           <a className="nav-cta" href={WHATSAPP} target="_blank" rel="noreferrer">
             <IconWhatsapp />
-            <span>Solicitar avaliação</span>
+            <span>Pedir orçamento</span>
           </a>
         </div>
 
@@ -209,7 +206,7 @@ function Header() {
           </a>
         ))}
         <a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={close}>
-          Solicitar avaliação
+          Pedir orçamento
         </a>
       </div>
     </header>
@@ -270,27 +267,287 @@ function useHashScroll() {
 
 function ScooterBlueprint() {
   return (
-    <svg className="scooter-blueprint" viewBox="20 38 570 294" aria-hidden="true">
+    <svg className="scooter-blueprint" viewBox="0 0 640 330" aria-hidden="true">
       <defs>
-        <linearGradient id="blueprintLine" x1="0" x2="1">
-          <stop offset="0%" stopColor="#5ee0a1" stopOpacity="0.15" />
-          <stop offset="45%" stopColor="#5ee0a1" stopOpacity="0.95" />
-          <stop offset="100%" stopColor="#e2a75f" stopOpacity="0.24" />
+        <radialGradient id="sc-tire" cx="33%" cy="33%" r="60%">
+          <stop offset="0%" stopColor="#233028" />
+          <stop offset="60%" stopColor="#0d1510" />
+          <stop offset="100%" stopColor="#060a07" />
+        </radialGradient>
+        <radialGradient id="sc-rim" cx="38%" cy="36%" r="58%">
+          <stop offset="0%" stopColor="#344c3c" />
+          <stop offset="65%" stopColor="#14201a" />
+          <stop offset="100%" stopColor="#090d0a" />
+        </radialGradient>
+        <linearGradient id="sc-deck" x1="0%" x2="100%">
+          <stop offset="0%" stopColor="#1b2d21" />
+          <stop offset="48%" stopColor="#131f18" />
+          <stop offset="100%" stopColor="#1b2d21" />
         </linearGradient>
+        <linearGradient id="sc-stem" x1="0%" x2="100%">
+          <stop offset="0%" stopColor="#0c1610" />
+          <stop offset="28%" stopColor="#364c3e" />
+          <stop offset="72%" stopColor="#243630" />
+          <stop offset="100%" stopColor="#0c1610" />
+        </linearGradient>
+        <linearGradient id="sc-hbar" x1="0%" x2="100%">
+          <stop offset="0%" stopColor="#162018" />
+          <stop offset="22%" stopColor="#364c3e" />
+          <stop offset="78%" stopColor="#2c4034" />
+          <stop offset="100%" stopColor="#162018" />
+        </linearGradient>
+        <filter id="sc-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="5" result="b" />
+          <feColorMatrix in="b" type="matrix" values="0 0 0 0 0.09  0 0 0 0 0.82  0 0 0 0 0.48  0 0 0 0.8 0" />
+          <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        <filter id="sc-soft" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="2.5" result="b" />
+          <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+        {/* Clip that exposes only the upper-left arc of the wheel for the fender */}
+        <clipPath id="sc-fend-clip">
+          <polygon points="154,246 205,148 -10,40 -10,290 105,310" />
+        </clipPath>
       </defs>
-      <path className="blueprint-grid" d="M20 300H590M20 248H590M20 196H590M20 144H590M20 92H590" />
-      <path className="blueprint-grid" d="M78 50V320M154 50V320M230 50V320M306 50V320M382 50V320M458 50V320M534 50V320" />
-      <circle className="wheel-outline" cx="156" cy="262" r="58" />
-      <circle className="wheel-outline" cx="452" cy="262" r="58" />
-      <circle className="wheel-core" cx="156" cy="262" r="16" />
-      <circle className="wheel-core" cx="452" cy="262" r="16" />
-      <path className="scooter-frame" d="M156 262H336L432 128M318 262L392 164H470" />
-      <path className="scooter-frame thin" d="M432 128V62M405 62H482M336 262L390 262M224 238H330" />
-      <path className="pulse-route" d="M156 262H336L432 128V62H482" />
-      <rect className="deck" x="206" y="230" width="148" height="24" rx="8" />
-      <circle className="blueprint-node active" cx="336" cy="262" r="8" />
-      <circle className="blueprint-node" cx="432" cy="128" r="8" />
-      <circle className="blueprint-node warn" cx="224" cy="238" r="8" />
+
+      {/* Background grid */}
+      <path className="blueprint-grid" d="M40 286H604M40 232H604M40 178H604M40 124H604M40 70H604" />
+      <path className="blueprint-grid" d="M78 46V306M156 46V306M234 46V306M312 46V306M390 46V306M468 46V306M546 46V306" />
+
+      {/* Ground shadow + LED reflection */}
+      <ellipse cx="320" cy="294" rx="272" ry="14" fill="rgba(0,0,0,0.48)" />
+      <ellipse cx="320" cy="297" rx="196" ry="7" fill="rgba(25,211,125,0.055)" />
+
+      {/* REAR WHEEL */}
+      {/* Depth shadow (pseudo-3D) */}
+      <circle cx="159" cy="250" r="63" fill="rgba(0,0,0,0.45)" />
+      {/* Outer tire edge */}
+      <circle cx="154" cy="246" r="64" fill="#080c09" />
+      {/* Tire body */}
+      <circle cx="154" cy="246" r="62" fill="url(#sc-tire)" />
+      {/* Tread shoulder line */}
+      <circle cx="154" cy="246" r="62" fill="none" stroke="#1e2c1e" strokeWidth="1.5" />
+      {/* Tread grooves — dois anéis de ranhura */}
+      <circle cx="154" cy="246" r="59" fill="none" stroke="#060a07" strokeWidth="3" strokeDasharray="10 5" />
+      <circle cx="154" cy="246" r="55" fill="none" stroke="#060a07" strokeWidth="2" strokeDasharray="7 6" />
+      {/* Sidewall character line */}
+      <circle cx="154" cy="246" r="52" fill="none" stroke="#1e2c20" strokeWidth="1" opacity="0.65" />
+      {/* Rim bead seat */}
+      <circle cx="154" cy="246" r="50" fill="none" stroke="#2a3e32" strokeWidth="3.5" />
+      {/* Rim body */}
+      <circle cx="154" cy="246" r="49" fill="url(#sc-rim)" />
+      <circle cx="154" cy="246" r="49" fill="none" stroke="#3c5448" strokeWidth="1.5" opacity="0.55" />
+      {/* Rim channel */}
+      <circle cx="154" cy="246" r="46" fill="none" stroke="#0a0e0b" strokeWidth="4" />
+      {/* 8 spokes */}
+      <g fill="none" stroke="#1c3024" strokeWidth="3" strokeLinecap="round">
+        <line x1="154" y1="224" x2="154" y2="197" />
+        <line x1="170" y1="230" x2="189" y2="212" />
+        <line x1="176" y1="246" x2="203" y2="246" />
+        <line x1="170" y1="262" x2="189" y2="280" />
+        <line x1="154" y1="268" x2="154" y2="295" />
+        <line x1="138" y1="262" x2="119" y2="280" />
+        <line x1="132" y1="246" x2="105" y2="246" />
+        <line x1="138" y1="230" x2="119" y2="212" />
+      </g>
+      {/* Spoke highlights */}
+      <g fill="none" stroke="#3c5448" strokeWidth="1" strokeLinecap="round" opacity="0.5">
+        <line x1="154" y1="223" x2="154" y2="198" />
+        <line x1="170" y1="229" x2="188" y2="213" />
+        <line x1="175" y1="246" x2="202" y2="246" />
+        <line x1="170" y1="263" x2="188" y2="279" />
+        <line x1="154" y1="269" x2="154" y2="294" />
+        <line x1="138" y1="263" x2="120" y2="279" />
+        <line x1="133" y1="246" x2="106" y2="246" />
+        <line x1="138" y1="229" x2="120" y2="213" />
+      </g>
+      {/* Spoke nipples na roda */}
+      <g fill="#2a3e32" stroke="#3c5448" strokeWidth="0.8">
+        <circle cx="154" cy="197" r="2.5" />
+        <circle cx="189" cy="212" r="2.5" />
+        <circle cx="203" cy="246" r="2.5" />
+        <circle cx="189" cy="280" r="2.5" />
+        <circle cx="154" cy="295" r="2.5" />
+        <circle cx="119" cy="280" r="2.5" />
+        <circle cx="105" cy="246" r="2.5" />
+        <circle cx="119" cy="212" r="2.5" />
+      </g>
+      {/* Hub motor — carcaça */}
+      <circle cx="154" cy="246" r="24" fill="#0c1210" stroke="#182218" strokeWidth="2.5" />
+      <circle cx="154" cy="246" r="20" fill="#0a0d0b" />
+      {/* Motor stator: anel verde pontilhado */}
+      <circle cx="154" cy="246" r="19" fill="none" stroke="#19d37d" strokeWidth="1.5" strokeDasharray="5 3" strokeOpacity="0.65" filter="url(#sc-glow)" />
+      {/* Marcas de ventilação */}
+      <g stroke="#1e2e22" strokeWidth="1.5" strokeLinecap="round">
+        <line x1="154" y1="234" x2="154" y2="228" />
+        <line x1="162" y1="238" x2="166" y2="233" />
+        <line x1="164" y1="246" x2="170" y2="246" />
+        <line x1="162" y1="254" x2="166" y2="259" />
+        <line x1="154" y1="258" x2="154" y2="264" />
+        <line x1="146" y1="254" x2="142" y2="259" />
+        <line x1="144" y1="246" x2="138" y2="246" />
+        <line x1="146" y1="238" x2="142" y2="233" />
+      </g>
+      {/* Eixo */}
+      <circle cx="154" cy="246" r="9" fill="#141e18" stroke="#2e4438" strokeWidth="1.5" />
+      <circle cx="154" cy="246" r="5" fill="#19d37d" fillOpacity="0.28" filter="url(#sc-glow)" />
+      {/* Disco de freio */}
+      <circle cx="154" cy="246" r="33" fill="none" stroke="#182218" strokeWidth="7" />
+      <circle cx="154" cy="246" r="33" fill="none" stroke="#3c5448" strokeWidth="1" strokeDasharray="10 6" strokeOpacity="0.3" />
+
+      {/* FRONT WHEEL */}
+      <circle cx="471" cy="250" r="63" fill="rgba(0,0,0,0.45)" />
+      <circle cx="466" cy="246" r="64" fill="#080c09" />
+      <circle cx="466" cy="246" r="62" fill="url(#sc-tire)" />
+      <circle cx="466" cy="246" r="62" fill="none" stroke="#1e2c1e" strokeWidth="1.5" />
+      <circle cx="466" cy="246" r="59" fill="none" stroke="#060a07" strokeWidth="3" strokeDasharray="10 5" />
+      <circle cx="466" cy="246" r="55" fill="none" stroke="#060a07" strokeWidth="2" strokeDasharray="7 6" />
+      <circle cx="466" cy="246" r="52" fill="none" stroke="#1e2c20" strokeWidth="1" opacity="0.65" />
+      <circle cx="466" cy="246" r="50" fill="none" stroke="#2a3e32" strokeWidth="3.5" />
+      <circle cx="466" cy="246" r="49" fill="url(#sc-rim)" />
+      <circle cx="466" cy="246" r="49" fill="none" stroke="#3c5448" strokeWidth="1.5" opacity="0.55" />
+      <circle cx="466" cy="246" r="46" fill="none" stroke="#0a0e0b" strokeWidth="4" />
+      {/* 8 spokes */}
+      <g fill="none" stroke="#1c3024" strokeWidth="3" strokeLinecap="round">
+        <line x1="466" y1="224" x2="466" y2="197" />
+        <line x1="482" y1="230" x2="501" y2="212" />
+        <line x1="488" y1="246" x2="515" y2="246" />
+        <line x1="482" y1="262" x2="501" y2="280" />
+        <line x1="466" y1="268" x2="466" y2="295" />
+        <line x1="450" y1="262" x2="431" y2="280" />
+        <line x1="444" y1="246" x2="417" y2="246" />
+        <line x1="450" y1="230" x2="431" y2="212" />
+      </g>
+      <g fill="none" stroke="#3c5448" strokeWidth="1" strokeLinecap="round" opacity="0.5">
+        <line x1="466" y1="223" x2="466" y2="198" />
+        <line x1="482" y1="229" x2="500" y2="213" />
+        <line x1="487" y1="246" x2="514" y2="246" />
+        <line x1="482" y1="263" x2="500" y2="279" />
+        <line x1="466" y1="269" x2="466" y2="294" />
+        <line x1="450" y1="263" x2="432" y2="279" />
+        <line x1="445" y1="246" x2="418" y2="246" />
+        <line x1="450" y1="229" x2="432" y2="213" />
+      </g>
+      <g fill="#2a3e32" stroke="#3c5448" strokeWidth="0.8">
+        <circle cx="466" cy="197" r="2.5" />
+        <circle cx="501" cy="212" r="2.5" />
+        <circle cx="515" cy="246" r="2.5" />
+        <circle cx="501" cy="280" r="2.5" />
+        <circle cx="466" cy="295" r="2.5" />
+        <circle cx="431" cy="280" r="2.5" />
+        <circle cx="417" cy="246" r="2.5" />
+        <circle cx="431" cy="212" r="2.5" />
+      </g>
+      {/* Hub dianteiro simples */}
+      <circle cx="466" cy="246" r="20" fill="#0c1210" stroke="#182218" strokeWidth="2.5" />
+      <circle cx="466" cy="246" r="9" fill="#141e18" stroke="#2e4438" strokeWidth="1.5" />
+      <circle cx="466" cy="246" r="5" fill="#2e4438" fillOpacity="0.7" />
+      {/* Disco de freio */}
+      <circle cx="466" cy="246" r="33" fill="none" stroke="#182218" strokeWidth="7" />
+      <circle cx="466" cy="246" r="33" fill="none" stroke="#3c5448" strokeWidth="1" strokeDasharray="10 6" strokeOpacity="0.28" />
+
+      {/* REAR FENDER — perfect uniform arc via clip + circle stroke */}
+      <g clipPath="url(#sc-fend-clip)">
+        <circle cx="154" cy="246" r="70" fill="none" stroke="#1b2d21" strokeWidth="14" />
+        <circle cx="154" cy="246" r="70" fill="none" stroke="#3c5448" strokeWidth="1.5" opacity="0.55" />
+      </g>
+      {/* Taillight */}
+      <rect x="77" y="220" width="18" height="11" rx="3.5" fill="#1a0a0a" stroke="#cc3030" strokeWidth="1.5" />
+      <rect x="80" y="222" width="12" height="7" rx="2" fill="#cc3030" fillOpacity="0.72" filter="url(#sc-soft)" />
+
+      {/* DECK — with 3D bottom face */}
+      <path d="M176 220 L418 220 L425 228 L183 228 Z" fill="#080e0a" />
+      <rect x="174" y="196" width="246" height="26" rx="10" fill="url(#sc-deck)" />
+      <rect x="174" y="196" width="246" height="26" rx="10" fill="none" stroke="#283c2e" strokeWidth="1.5" />
+      {/* Deck top highlight */}
+      <rect x="178" y="197" width="238" height="3" rx="3" fill="rgba(255,255,255,0.035)" />
+      {/* Grip tape lines */}
+      <g stroke="rgba(255,255,255,0.038)" strokeWidth="1">
+        <line x1="182" y1="201" x2="412" y2="201" />
+        <line x1="182" y1="205" x2="412" y2="205" />
+        <line x1="182" y1="209" x2="412" y2="209" />
+        <line x1="182" y1="213" x2="412" y2="213" />
+        <line x1="182" y1="217" x2="412" y2="217" />
+      </g>
+      {/* Battery window */}
+      <rect x="196" y="206" width="158" height="10" rx="4" fill="#080e09" stroke="#19d37d" strokeWidth="0.8" opacity="0.45" />
+      <rect x="200" y="208" width="26" height="6" rx="2.5" fill="#19d37d" fillOpacity="0.72" />
+      <rect x="230" y="208" width="26" height="6" rx="2.5" fill="#19d37d" fillOpacity="0.68" />
+      <rect x="260" y="208" width="26" height="6" rx="2.5" fill="#19d37d" fillOpacity="0.55" />
+      <rect x="290" y="208" width="26" height="6" rx="2.5" fill="#19d37d" fillOpacity="0.35" />
+      <rect x="320" y="208" width="26" height="6" rx="2.5" fill="#1c3024" fillOpacity="0.8" />
+      {/* LED underline strip */}
+      <line x1="184" y1="221" x2="414" y2="221" stroke="#19d37d" strokeWidth="2.5" strokeOpacity="0.55" filter="url(#sc-glow)" />
+      {/* Charging port */}
+      <rect x="413" y="200" width="10" height="14" rx="3" fill="#0c1610" stroke="#2e4438" strokeWidth="1" />
+      <rect x="415" y="204" width="6" height="6" rx="1.5" fill="#19d37d" fillOpacity="0.4" />
+
+      {/* STEM — nearly vertical, slight forward lean */}
+      <path d="M402 208 L424 72" stroke="#050808" strokeWidth="22" strokeLinecap="round" />
+      <path d="M400 206 L422 70" stroke="url(#sc-stem)" strokeWidth="17" strokeLinecap="round" />
+      <path d="M402 206 L424 70" stroke="#3c5448" strokeWidth="3" strokeLinecap="round" opacity="0.55" />
+      <path d="M401 206 L423 70" stroke="#19d37d" strokeWidth="0.8" strokeLinecap="round" strokeOpacity="0.18" />
+
+      {/* Folding mechanism joint */}
+      <circle cx="412" cy="150" r="13" fill="#0c1610" stroke="#1c2c22" strokeWidth="2" />
+      <circle cx="412" cy="150" r="9" fill="#141e18" stroke="#19d37d" strokeWidth="1.5" strokeOpacity="0.6" />
+      <circle cx="412" cy="150" r="5" fill="#19d37d" fillOpacity="0.3" filter="url(#sc-glow)" />
+      <line x1="403" y1="150" x2="421" y2="150" stroke="#2e4438" strokeWidth="2" opacity="0.5" />
+      <line x1="409" y1="142" x2="415" y2="158" stroke="#2e4438" strokeWidth="1.5" opacity="0.3" />
+
+      {/* FRONT FORK */}
+      <path d="M402 210 L470 254" stroke="#050808" strokeWidth="16" strokeLinecap="round" />
+      <path d="M400 208 L468 252" stroke="url(#sc-stem)" strokeWidth="12" strokeLinecap="round" />
+      <path d="M402 208 L470 252" stroke="#3c5448" strokeWidth="2.5" strokeLinecap="round" opacity="0.5" />
+      {/* Fork second rail */}
+      <path d="M394 214 L461 258" stroke="#1c2c22" strokeWidth="8" strokeLinecap="round" />
+      <path d="M396 214 L463 258" stroke="#2e4438" strokeWidth="2" strokeLinecap="round" opacity="0.35" />
+
+      {/* HANDLEBAR — perfil lateral: tubos vistos de lado como cilindros */}
+      {/* Sombra do conjunto */}
+      <line x1="348" y1="75" x2="500" y2="75" stroke="#040806" strokeWidth="16" strokeLinecap="butt" />
+      {/* Tubo principal (perfil lateral) */}
+      <line x1="350" y1="70" x2="498" y2="70" stroke="#1a2c20" strokeWidth="11" strokeLinecap="butt" />
+      {/* Highlight topo do tubo */}
+      <line x1="350" y1="65" x2="498" y2="65" stroke="#3c5448" strokeWidth="2" strokeLinecap="butt" opacity="0.5" />
+
+      {/* Tampa esquerda — elipse (tubo indo para longe do viewer) */}
+      <ellipse cx="350" cy="70" rx="6" ry="12" fill="#0e1810" stroke="#253828" strokeWidth="2" />
+      <ellipse cx="350" cy="70" rx="3" ry="6" fill="#162018" opacity="0.6" />
+
+      {/* Tampa direita — elipse (tubo vindo em direção ao viewer, throttle) */}
+      <ellipse cx="498" cy="70" rx="6" ry="12" fill="#0d1c12" stroke="#19d37d" strokeWidth="1.5" strokeOpacity="0.6" />
+      <ellipse cx="498" cy="70" rx="3" ry="6" fill="#1a3020" opacity="0.7" />
+
+      {/* Alavanca de freio esquerda — desce e vai para frente */}
+      <line x1="366" y1="76" x2="380" y2="96" stroke="#1e3028" strokeWidth="6" strokeLinecap="round" />
+      <line x1="367" y1="76" x2="381" y2="96" stroke="#3c5448" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+
+      {/* Alavanca de freio direita */}
+      <line x1="480" y1="76" x2="466" y2="96" stroke="#1e3028" strokeWidth="6" strokeLinecap="round" />
+      <line x1="479" y1="76" x2="465" y2="96" stroke="#3c5448" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
+
+      {/* Display central — sobre o tubo */}
+      <rect x="406" y="56" width="34" height="22" rx="6" fill="#080e08" stroke="#1a2a1a" strokeWidth="2" />
+      <rect x="409" y="59" width="28" height="16" rx="4" fill="#091609" stroke="#19d37d" strokeWidth="1" />
+      <rect x="412" y="62" width="18" height="2.5" rx="1.2" fill="#19d37d" fillOpacity="0.72" />
+      <rect x="412" y="67" width="13" height="2.5" rx="1.2" fill="#19d37d" fillOpacity="0.45" />
+      <rect x="412" y="72" width="8" height="2" rx="1" fill="#19d37d" fillOpacity="0.35" />
+
+      {/* FAROL — na face frontal do mastro, abaixo do guidão */}
+      <ellipse cx="432" cy="90" rx="11" ry="9" fill="#1a3020" stroke="#19d37d" strokeWidth="1.5" filter="url(#sc-glow)" />
+      <ellipse cx="432" cy="90" rx="7" ry="5.5" fill="#d0ffe4" fillOpacity="0.88" />
+      {/* Cone de luz para frente */}
+      <path d="M442 83 L522 58" stroke="#19d37d" strokeWidth="18" strokeOpacity="0.04" strokeLinecap="round" />
+      <path d="M442 90 L528 90" stroke="#19d37d" strokeWidth="11" strokeOpacity="0.03" strokeLinecap="round" />
+      <path d="M442 97 L520 114" stroke="#19d37d" strokeWidth="7" strokeOpacity="0.02" strokeLinecap="round" />
+
+      {/* FRONT FENDER */}
+      <path d="M425 160 Q450 195 464 212" fill="none" stroke="#0e1810" strokeWidth="11" strokeLinecap="round" />
+      <path d="M425 160 Q450 195 464 212" fill="none" stroke="#1c2e22" strokeWidth="7" strokeLinecap="round" />
+      <path d="M427 160 Q452 195 466 212" fill="none" stroke="#304838" strokeWidth="2" strokeLinecap="round" opacity="0.6" />
+
     </svg>
   )
 }
@@ -452,14 +709,132 @@ function ServiceVisual({ type }) {
 
   return (
     <svg className="service-visual board-visual" viewBox="0 0 360 220" aria-hidden="true">
-      <rect className="board-base" x="54" y="42" width="252" height="138" rx="18" />
-      <rect className="board-chip" x="134" y="78" width="88" height="64" rx="10" />
-      <path className="board-line" d="M82 78H134M222 92H278M82 140H134M222 132H278M178 42V78M178 142V180" />
-      <circle className="board-node active" cx="82" cy="78" r="8" />
-      <circle className="board-node" cx="278" cy="92" r="8" />
-      <circle className="board-node warn" cx="82" cy="140" r="8" />
-      <circle className="board-node" cx="278" cy="132" r="8" />
-      <path className="service-pulse" d="M82 78H134V110H222V92H278" />
+      <defs>
+        <filter id="brd-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="b" />
+          <feColorMatrix in="b" type="matrix" values="0 0 0 0 0.09  0 0 0 0 0.82  0 0 0 0 0.48  0 0 0 0.8 0" />
+          <feMerge><feMergeNode /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+
+      {/* PCB base */}
+      <rect className="board-base" x="14" y="10" width="332" height="200" rx="12" />
+      <rect x="14" y="10" width="332" height="200" rx="12" fill="none" stroke="rgba(25,211,125,0.1)" strokeWidth="1" />
+      {/* Furos de fixação */}
+      {[[28,24],[332,24],[28,196],[332,196]].map(([x,y],i) => (
+        <g key={i}><circle cx={x} cy={y} r="5" fill="none" stroke="rgba(255,255,255,0.14)" strokeWidth="1.5" /><circle cx={x} cy={y} r="2" fill="rgba(255,255,255,0.08)" /></g>
+      ))}
+
+      {/* CONECTOR DE BATERIA — esquerda */}
+      <rect x="16" y="58" width="30" height="48" rx="4" fill="#0d1e12" stroke="rgba(25,211,125,0.42)" strokeWidth="1.5" />
+      {[[20,62],[30,62],[20,78],[30,78],[20,94],[30,94]].map(([x,y],i) => (
+        <rect key={i} x={x} y={y} width="10" height="12" rx="2" fill={`rgba(25,211,125,${i<2?0.22:0.14})`} />
+      ))}
+      <text x="31" y="116" fill="rgba(25,211,125,0.45)" fontSize="6" fontFamily="monospace" textAnchor="middle">BATT</text>
+
+      {/* TRILHAS DE POTÊNCIA — grossas âmbar */}
+      <path d="M46 66 H94" fill="none" stroke="#f2b84b" strokeWidth="5" strokeOpacity="0.38" strokeLinecap="round" />
+      <path d="M46 66 H94" fill="none" stroke="#f2b84b" strokeWidth="1.5" strokeOpacity="0.55" strokeLinecap="round" />
+      <path d="M46 82 H94" fill="none" stroke="#152018" strokeWidth="5" strokeOpacity="0.9" strokeLinecap="round" />
+
+      {/* CI PRINCIPAL — controladora */}
+      <rect className="board-chip" x="92" y="52" width="98" height="116" rx="8" />
+      <rect x="100" y="60" width="82" height="100" rx="5" fill="#0d2214" stroke="rgba(25,211,125,0.14)" strokeWidth="0.8" />
+      <circle cx="96" cy="56" r="2.5" fill="rgba(25,211,125,0.55)" />
+      <text x="141" y="107" fill="rgba(255,255,255,0.55)" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">MCU</text>
+      <text x="141" y="120" fill="rgba(25,211,125,0.65)" fontSize="7" fontFamily="monospace" textAnchor="middle">CTRL</text>
+      <rect x="108" y="128" width="66" height="10" rx="2" fill="#1a3020" stroke="rgba(25,211,125,0.1)" strokeWidth="0.8" />
+      {/* Pinos top */}
+      <g fill="rgba(192,200,196,0.42)">
+        {[100,110,120,130,140,150,160,170].map(x => <rect key={x} x={x} y="46" width="5" height="7" rx="1" />)}
+      </g>
+      {/* Pinos bottom */}
+      <g fill="rgba(192,200,196,0.42)">
+        {[100,110,120,130,140,150,160,170].map(x => <rect key={x} x={x} y="167" width="5" height="7" rx="1" />)}
+      </g>
+      {/* Pinos left */}
+      <g fill="rgba(192,200,196,0.42)">
+        {[62,76,90,104,118,132,146].map(y => <rect key={y} x="86" y={y} width="6" height="5" rx="1" />)}
+      </g>
+      {/* Pinos right */}
+      <g fill="rgba(192,200,196,0.42)">
+        {[62,76,90,104,118,132,146].map(y => <rect key={y} x="190" y={y} width="6" height="5" rx="1" />)}
+      </g>
+
+      {/* TRILHAS DE GATE — finas verdes (sinal) */}
+      <g fill="none" stroke="#19d37d" strokeWidth="1.2" strokeOpacity="0.38" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M196 66 H214 V46 H228" />
+        <path d="M196 80 H214 V92 H228" />
+        <path d="M196 94 H214 V138 H228" />
+      </g>
+
+      {/* MOSFETs × 3 */}
+      {[[228,34],[228,79],[228,125]].map(([x,y],i) => (
+        <g key={i}>
+          <rect x={x} y={y} width="36" height="24" rx="4" fill="#0d1e12" stroke="rgba(25,211,125,0.45)" strokeWidth="1.5" />
+          <rect x={x+2} y={y+2} width="32" height="10" rx="2" fill="#192e1c" />
+          <line x1={x+2} y1={y+12} x2={x+34} y2={y+12} stroke="rgba(25,211,125,0.1)" strokeWidth="0.8" />
+          <text x={x+18} y={y+21} fill="rgba(25,211,125,0.45)" fontSize="5.5" fontFamily="monospace" textAnchor="middle">FET</text>
+          {[x+4,x+14,x+24].map(lx => <rect key={lx} x={lx} y={y+24} width="5" height="7" rx="1" fill="rgba(192,200,196,0.5)" />)}
+        </g>
+      ))}
+
+      {/* TRILHAS DE FASE — MOSFETs ao conector de motor */}
+      {[46,91,137].map(y => (
+        <g key={y}>
+          <path d={`M264 ${y} H282`} fill="none" stroke="#f2b84b" strokeWidth="3.5" strokeOpacity="0.36" strokeLinecap="round" />
+          <path d={`M264 ${y} H282`} fill="none" stroke="#f2b84b" strokeWidth="1" strokeOpacity="0.55" strokeLinecap="round" />
+        </g>
+      ))}
+
+      {/* CONECTOR DE MOTOR — direita */}
+      <rect x="282" y="26" width="28" height="134" rx="4" fill="#0d1e12" stroke="rgba(242,184,75,0.4)" strokeWidth="1.5" />
+      {[[32,50],[77,95],[122,140]].map(([y1,y2],i) => (
+        <g key={i}>
+          <rect x="286" y={y1} width="20" height="20" rx="2" fill="rgba(242,184,75,0.18)" />
+        </g>
+      ))}
+      <text x="296" y="172" fill="rgba(242,184,75,0.5)" fontSize="6" fontFamily="monospace" textAnchor="middle">MTR</text>
+
+      {/* CAPACITORES BULK — topo e base */}
+      {[[54,36],[54,178]].map(([cx,cy]) => (
+        <g key={cy}>
+          <circle cx={cx} cy={cy} r="15" fill="#0d1e12" stroke="rgba(25,211,125,0.3)" strokeWidth="1.5" />
+          <circle cx={cx} cy={cy} r="8" fill="#182e1c" />
+          <path d={`M${cx-4} ${cy} H${cx+4}`} stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" strokeLinecap="round" />
+          <path d={`M${cx} ${cy-4} V${cy+4}`} stroke="rgba(255,255,255,0.3)" strokeWidth="1.5" strokeLinecap="round" />
+          <path d={`M${cx-13} ${cy-7} A15 15 0 0 1 ${cx+13} ${cy-7}`} fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="3.5" />
+        </g>
+      ))}
+      {/* Trilhas dos capacitores */}
+      <path d="M54 51 V66" fill="none" stroke="#f2b84b" strokeWidth="2.5" strokeOpacity="0.28" strokeLinecap="round" />
+      <path d="M54 163 V82" fill="none" stroke="#19d37d" strokeWidth="2.5" strokeOpacity="0.2" strokeLinecap="round" />
+
+      {/* CONECTOR HALL — bottom */}
+      <rect x="104" y="178" width="56" height="18" rx="3" fill="#0d1e12" stroke="rgba(25,211,125,0.32)" strokeWidth="1.2" />
+      <g fill="rgba(25,211,125,0.2)">
+        {[107,118,129,140,151].map(x => <rect key={x} x={x} y="181" width="7" height="12" rx="1.5" />)}
+      </g>
+      <text x="132" y="207" fill="rgba(25,211,125,0.4)" fontSize="5.5" fontFamily="monospace" textAnchor="middle">HALL</text>
+      <path d="M132 174 V178" fill="none" stroke="#19d37d" strokeWidth="1" strokeOpacity="0.35" strokeLinecap="round" />
+
+      {/* RESISTORES SMD */}
+      {[[200,178],[220,178]].map(([x,y]) => (
+        <g key={x}>
+          <rect x={x} y={y} width="16" height="7" rx="2" fill="#1a2c1e" stroke="rgba(242,184,75,0.28)" strokeWidth="1" />
+          <line x1={x-3} y1={y+3.5} x2={x} y2={y+3.5} stroke="rgba(192,200,196,0.4)" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1={x+16} y1={y+3.5} x2={x+19} y2={y+3.5} stroke="rgba(192,200,196,0.4)" strokeWidth="1.5" strokeLinecap="round" />
+        </g>
+      ))}
+
+      {/* PULSE ANIMADO */}
+      <path className="service-pulse" d="M46 66 H92 M190 110 H214 V92 H228 M264 91 H282" />
+
+      {/* NÓS DIAGNÓSTICOS */}
+      <circle className="board-node warn" cx="46" cy="66" r="6" />
+      <circle className="board-node active" cx="92" cy="66" r="6" />
+      <circle className="board-node active" cx="264" cy="91" r="6" />
+      <circle className="board-node" cx="282" cy="91" r="6" />
     </svg>
   )
 }
@@ -469,23 +844,23 @@ function Hero() {
     <section className="hero" id="top">
       <div className="hero-shell">
         <div className="hero-copy">
-          <p className="eyebrow">Bancada independente em Águas Claras / Brasília</p>
+          <p className="eyebrow">Reparo de patinetes em Águas Claras / Brasília</p>
           <h1>
-            <span>Patinete parado?</span>
-            <span>Diagnóstico antes</span>
-            <span>da troca.</span>
+            <span>Patinete com defeito?</span>
+            <span>Peça o orçamento</span>
+            <span>pelo WhatsApp.</span>
           </h1>
           <p>
-            Reparo feito por especialista independente, com medição real na bancada, orçamento explicado e contato direto
-            com quem abre o equipamento.
+            Atendimento direto com quem faz o reparo. Envie o sintoma, uma foto ou vídeo curto e receba a orientação para
+            avaliar o próximo passo.
           </p>
           <div className="hero-actions">
             <a className="button primary" href={WHATSAPP} target="_blank" rel="noreferrer">
               <IconWhatsapp />
-              Solicitar avaliação
+              Pedir orçamento no WhatsApp
             </a>
-            <a className="button secondary" href="#diagnostico">
-              Ver método técnico
+            <a className="button secondary" href="#orcamento">
+              O que enviar
               <IconArrow />
             </a>
           </div>
@@ -503,20 +878,20 @@ function CredibilityBar() {
   return (
     <section className="credibility" id="bancada">
       <div className="metric reveal" style={{ '--i': 0 }}>
-        <strong>1:1</strong>
-        <span>contato direto com quem faz o reparo</span>
+        <strong>Direto</strong>
+        <span>você fala com quem vai avaliar o patinete</span>
       </div>
       <div className="metric reveal" style={{ '--i': 1 }}>
-        <strong>Antes</strong>
-        <span>orçamento aprovado antes de trocar peça</span>
+        <strong>Rápido</strong>
+        <span>triagem inicial pelo WhatsApp com foto ou vídeo</span>
       </div>
       <div className="metric reveal" style={{ '--i': 2 }}>
         <strong>Bancada</strong>
-        <span>diagnóstico com medição e inspeção visual</span>
+        <span>avaliação técnica antes de indicar troca de peça</span>
       </div>
       <div className="metric reveal" style={{ '--i': 3 }}>
-        <strong>Teste</strong>
-        <span>freio, painel, carga e aceleração conferidos</span>
+        <strong>Clareza</strong>
+        <span>você entende o serviço antes de aprovar</span>
       </div>
     </section>
   )
@@ -524,15 +899,19 @@ function CredibilityBar() {
 
 function LabDeck() {
   return (
-    <section className="lab-deck">
+    <section className="lab-deck lead-deck" id="orcamento">
       <div className="lab-deck-inner">
         <div className="lab-copy reveal">
-          <span>Fluxo de atendimento</span>
-          <h2>Do primeiro sintoma à entrega, tudo fica claro.</h2>
+          <span>Orçamento pelo WhatsApp</span>
+          <h2>Para começar, mande só o essencial.</h2>
           <p>
-            O atendimento começa com uma triagem simples e avança para medição real na bancada. O cliente entende o que
-            está acontecendo antes de aprovar qualquer troca de peça.
+            A ideia é tirar o cliente da dúvida sem jogar informação demais na tela. Com três coisas simples já dá para
+            orientar se vale levar para avaliação.
           </p>
+          <a className="button primary lead-button" href={WHATSAPP} target="_blank" rel="noreferrer">
+            <IconWhatsapp />
+            Enviar informações agora
+          </a>
         </div>
         <div className="lab-modules">
           {labModules.map(([title, text], index) => (
@@ -552,11 +931,10 @@ function Services() {
   return (
     <section className="section services" id="servicos">
       <div className="section-heading reveal">
-        <span>Serviços</span>
-        <h2>Especialidade técnica, processo claro e custo explicado.</h2>
+        <span>O que ele repara</span>
+        <h2>Os problemas mais comuns, sem deixar o cliente perdido.</h2>
         <p>
-          O foco é encontrar a causa do defeito antes de transformar tudo em troca de peça. Quando reparar compensa, o
-          orçamento mostra exatamente o que será feito.
+          Esta parte existe só para o cliente se reconhecer rápido. O detalhe técnico fica para a conversa no WhatsApp.
         </p>
       </div>
 
@@ -958,13 +1336,13 @@ function Contact() {
           <span>Contato</span>
           <h2>Solicite uma avaliação pelo WhatsApp.</h2>
           <p>
-            Atendimento em Águas Claras, Brasília - DF. Envie o sintoma, modelo do patinete e uma foto para orientar o
-            melhor próximo passo.
+            Atendimento em Águas Claras, Brasília - DF. Envie modelo, sintoma e uma foto ou vídeo curto para começar o
+            orçamento.
           </p>
           <div className="contact-actions">
             <a className="button primary" href={WHATSAPP} target="_blank" rel="noreferrer">
               <IconWhatsapp />
-              Chamar no WhatsApp
+              Pedir orçamento
             </a>
             <a className="button secondary" href={MAPS_DIR} target="_blank" rel="noreferrer">
               Abrir rota
@@ -1023,7 +1401,7 @@ function StickyCta() {
       aria-label="Solicitar avaliação pelo WhatsApp"
     >
       <IconWhatsapp />
-      Solicitar avaliação
+      Orçamento no WhatsApp
     </a>
   )
 }
@@ -1039,13 +1417,7 @@ export default function App() {
         <Hero />
         <CredibilityBar />
         <LabDeck />
-        <Standards />
         <Services />
-        <DiagnosticMethod />
-        <Checklist />
-        <Process />
-        <Responsible />
-        <Faq />
         <Contact />
       </main>
       <Footer />

@@ -1202,6 +1202,37 @@ main::after {
     linear-gradient(180deg, #0d1712 0%, #09100d 100%);
 }
 
+.lead-deck {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 14% 24%, rgba(25, 211, 125, 0.18), transparent 30%),
+    radial-gradient(circle at 82% 70%, rgba(242, 184, 75, 0.1), transparent 28%),
+    linear-gradient(90deg, rgba(25, 211, 125, 0.052) 1px, transparent 1px) 0 0 / 78px 78px,
+    linear-gradient(180deg, #07100c 0%, #0d1712 100%);
+}
+
+.lead-deck::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(112deg, transparent 0 38%, rgba(25, 211, 125, 0.1) 50%, transparent 62% 100%);
+  content: "";
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.lead-deck .lab-deck-inner {
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  grid-template-columns: minmax(300px, 0.72fr) minmax(520px, 1.28fr);
+}
+
+.lead-button {
+  width: max-content;
+  margin-top: 28px;
+}
+
 .standards {
   position: relative;
   overflow: hidden;
@@ -2567,8 +2598,8 @@ main::after {
 
 .service-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.96fr) minmax(460px, 1.04fr);
-  grid-template-rows: repeat(2, minmax(286px, auto));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: auto;
   gap: 18px;
   width: min(var(--page-max), 100%);
   margin: 0 auto;
@@ -2641,7 +2672,7 @@ main::after {
 }
 
 .service-card:first-child {
-  grid-row: span 2;
+  grid-row: span 1;
 }
 
 .service-card:hover {
@@ -2690,7 +2721,7 @@ main::after {
 }
 
 .service-card:first-child .service-visual {
-  height: 310px;
+  height: 160px;
 }
 
 .board-base,
@@ -3833,7 +3864,7 @@ main::after {
   }
 
   .service-card:first-child .service-visual {
-    height: 360px;
+    height: 160px;
   }
 }
 
@@ -3996,7 +4027,7 @@ main::after {
 
   .service-card:first-child {
     grid-row: auto;
-    grid-column: span 2;
+    grid-column: auto;
   }
 
   .metric:nth-child(2) {
@@ -5754,6 +5785,31 @@ main::after {
     width: 6px;
     height: 6px;
     flex: 0 0 6px;
+  }
+
+  .lead-deck .lab-deck-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .lead-button {
+    width: 100%;
+  }
+
+  .lead-deck .lab-module {
+    min-height: 138px;
+  }
+
+  .lead-deck .lab-module b {
+    margin-bottom: 22px;
+  }
+
+  .sticky-cta {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    display: inline-flex;
+    min-height: 54px;
+    border-radius: 12px;
   }
 }
 
