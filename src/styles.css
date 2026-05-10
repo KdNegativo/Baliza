@@ -3049,8 +3049,25 @@ main::after {
 }
 
 .service-body p {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   color: rgba(255, 255, 255, 0.64);
+}
+
+.service-help-line {
+  display: block;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--service-accent);
+  border-radius: 8px;
+  background: rgba(var(--service-accent-rgb), 0.1);
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.92rem;
+  line-height: 1.36;
+}
+
+.service-help-line::before {
+  color: var(--service-accent);
+  content: "Envie: ";
 }
 
 .service-body ul {
@@ -3078,6 +3095,43 @@ main::after {
 
 .service-card.clay .service-body li {
   color: #b8efd0;
+}
+
+.service-help-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(var(--page-max), 100%);
+  margin: 22px auto 0;
+  padding: 20px 22px;
+  border: 1px solid rgba(25, 211, 125, 0.18);
+  border-radius: 14px;
+  background:
+    linear-gradient(90deg, rgba(25, 211, 125, 0.12), transparent 48%),
+    rgba(255, 255, 255, 0.045);
+  color: #fff;
+  box-shadow: 0 20px 58px rgba(0, 0, 0, 0.22);
+}
+
+.service-help-cta span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--green);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.service-help-cta strong {
+  display: block;
+  max-width: 650px;
+  font-size: 1.12rem;
+  line-height: 1.28;
+}
+
+.service-help-cta .button {
+  flex: 0 0 auto;
 }
 
 .method.section {
@@ -5801,6 +5855,26 @@ main::after {
 
   .lead-deck .lab-module b {
     margin-bottom: 22px;
+  }
+
+  .service-help-line {
+    padding: 10px 11px;
+    font-size: 0.8rem;
+  }
+
+  .service-help-cta {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 18px;
+    text-align: left;
+  }
+
+  .service-help-cta strong {
+    font-size: 0.98rem;
+  }
+
+  .service-help-cta .button {
+    width: 100%;
   }
 
   .sticky-cta {

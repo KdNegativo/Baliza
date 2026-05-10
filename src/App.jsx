@@ -17,27 +17,30 @@ const navLinks = [
 
 const services = [
   {
-    title: 'Patinete não liga ou falha',
-    desc: 'Triagem de bateria, painel, chicote, controladora e conectores para entender a causa antes de trocar peça.',
-    items: ['não liga', 'desliga sozinho', 'erro no painel'],
+    title: 'Não liga ou aparece erro',
+    desc: 'O patinete apagou, reinicia sozinho, perdeu força ou mostra algum erro no painel.',
+    help: 'Mande uma foto do painel e conte quando o problema começou.',
+    items: ['não liga', 'erro no painel', 'desliga'],
     visual: 'board',
-    meta: 'elétrica e comando',
+    meta: 'não liga',
     accent: 'green',
   },
   {
-    title: 'Bateria fraca ou sem carga',
-    desc: 'Verificação de carregador, BMS, conectores e queda de tensão para indicar o melhor caminho.',
-    items: ['não carrega', 'autonomia baixa', 'queda de tensão'],
+    title: 'Não carrega ou acaba rápido',
+    desc: 'A bateria dura pouco, não aceita carga, o carregador não resolve ou a autonomia caiu muito.',
+    help: 'Mande foto do carregador, do painel e diga quanto tempo a carga está durando.',
+    items: ['não carrega', 'dura pouco', 'carregador'],
     visual: 'battery',
-    meta: 'bateria e carga',
+    meta: 'carga',
     accent: 'amber',
   },
   {
-    title: 'Barulho, freio ou pneu',
-    desc: 'Ajuste mecânico, freio raspando, pneu, rolamento, folga e conjunto de roda/motor.',
-    items: ['freio', 'pneu', 'rolamento'],
+    title: 'Freio, pneu ou barulho',
+    desc: 'Freio raspando, pneu furado, roda pesada, vibração, folga ou barulho estranho ao andar.',
+    help: 'Mande um vídeo curto mostrando o barulho ou a peça que está incomodando.',
+    items: ['freio raspando', 'pneu furado', 'barulho'],
     visual: 'wheel',
-    meta: 'rodagem',
+    meta: 'freio e pneu',
     accent: 'clay',
   },
 ]
@@ -931,10 +934,10 @@ function Services() {
   return (
     <section className="section services" id="servicos">
       <div className="section-heading reveal">
-        <span>O que ele repara</span>
-        <h2>Os problemas mais comuns, sem deixar o cliente perdido.</h2>
+        <span>Escolha o seu caso</span>
+        <h2>Qual problema o seu patinete está dando?</h2>
         <p>
-          Esta parte existe só para o cliente se reconhecer rápido. O detalhe técnico fica para a conversa no WhatsApp.
+          Não precisa saber o nome da peça. Se parecer com um desses casos, mande uma foto ou vídeo pelo WhatsApp.
         </p>
       </div>
 
@@ -949,6 +952,7 @@ function Services() {
             <div className="service-body">
               <h3>{service.title}</h3>
               <p>{service.desc}</p>
+              <strong className="service-help-line">{service.help}</strong>
               <ul>
                 {service.items.map((item) => (
                   <li key={item}>{item}</li>
@@ -957,6 +961,16 @@ function Services() {
             </div>
           </article>
         ))}
+      </div>
+      <div className="service-help-cta reveal">
+        <div>
+          <span>Não sabe explicar o defeito?</span>
+          <strong>Sem problema. Mande um vídeo curto e ele te orienta pelo WhatsApp.</strong>
+        </div>
+        <a className="button primary" href={WHATSAPP} target="_blank" rel="noreferrer">
+          <IconWhatsapp />
+          Tirar dúvida no WhatsApp
+        </a>
       </div>
     </section>
   )
