@@ -270,7 +270,7 @@ function useHashScroll() {
 
 function ScooterBlueprint() {
   return (
-    <svg className="scooter-blueprint" viewBox="0 0 640 330" aria-hidden="true">
+    <svg className="scooter-blueprint" viewBox="0 0 640 330" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       <defs>
         <radialGradient id="sc-tire" cx="33%" cy="33%" r="60%">
           <stop offset="0%" stopColor="#233028" />
@@ -624,25 +624,47 @@ function BrakeVisual() {
       cy: 110 + Math.sin(angle) * 25,
     }
   })
+  const slots = Array.from({ length: 10 }, (_, index) => index * 36)
 
   return (
-    <svg className="service-visual brake-visual" viewBox="0 0 360 220" aria-hidden="true">
+    <svg className="service-visual brake-visual" viewBox="0 0 360 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       <defs>
         <radialGradient id="brakeDisc" cx="42%" cy="36%" r="68%">
-          <stop offset="0%" stopColor="#f7faf6" />
-          <stop offset="48%" stopColor="#b7c0b7" />
-          <stop offset="100%" stopColor="#5d675f" />
+          <stop offset="0%" stopColor="#f6faf5" />
+          <stop offset="46%" stopColor="#b8c3ba" />
+          <stop offset="100%" stopColor="#59645d" />
         </radialGradient>
-        <linearGradient id="caliperGradient" x1="0" x2="1">
-          <stop offset="0%" stopColor="#0f2a1d" />
-          <stop offset="58%" stopColor="#20d982" />
-          <stop offset="100%" stopColor="#b7f45d" />
+        <radialGradient id="brakeDarkDisc" cx="48%" cy="52%" r="62%">
+          <stop offset="0%" stopColor="#2a342e" />
+          <stop offset="72%" stopColor="#111813" />
+          <stop offset="100%" stopColor="#050807" />
+        </radialGradient>
+        <linearGradient id="caliperGradient" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stopColor="#c6ff7e" />
+          <stop offset="42%" stopColor="#37df86" />
+          <stop offset="100%" stopColor="#12341f" />
         </linearGradient>
       </defs>
-      <path className="brake-shadow" d="M58 170C111 201 240 199 303 160" />
+      <path className="brake-shadow" d="M52 172C112 204 250 202 314 158" />
       <g className="brake-disc-svg">
+        <circle className="disc-backplate" cx="132" cy="110" r="76" />
         <circle className="disc-outer" cx="132" cy="110" r="68" />
+        <circle className="disc-inner-dark" cx="132" cy="110" r="57" />
         <circle className="disc-track" cx="132" cy="110" r="51" />
+        <g className="disc-slots">
+          {slots.map((angle) => (
+            <rect
+              className="disc-slot"
+              key={angle}
+              x="127"
+              y="54"
+              width="10"
+              height="32"
+              rx="5"
+              transform={`rotate(${angle} 132 110)`}
+            />
+          ))}
+        </g>
         {holes.map((hole) => (
           <circle className="disc-hole" key={`${hole.cx}-${hole.cy}`} cx={hole.cx} cy={hole.cy} r="4.6" />
         ))}
@@ -653,19 +675,21 @@ function BrakeVisual() {
         <circle className="disc-center" cx="132" cy="110" r="10" />
       </g>
       <g className="brake-caliper-svg">
-        <path className="caliper-shell" d="M198 54H286C304 54 318 68 318 86V134C318 152 304 166 286 166H198V141H280C286 141 291 136 291 130V90C291 84 286 79 280 79H198Z" />
-        <path className="caliper-window" d="M218 92H270V128H218Z" />
-        <rect className="brake-pad-svg pad-inner" x="184" y="84" width="17" height="52" rx="5" />
-        <rect className="brake-pad-svg pad-outer" x="252" y="86" width="17" height="48" rx="5" />
-        <path className="caliper-bridge-line" d="M204 76H282M204 144H282" />
-        <circle className="caliper-bolt" cx="297" cy="79" r="4.5" />
-        <circle className="caliper-bolt" cx="297" cy="141" r="4.5" />
+        <path className="caliper-shadow" d="M205 48C252 37 313 54 326 94C340 138 310 174 263 176H209L222 147H263C287 147 303 132 302 109C301 84 281 73 252 75L223 80Z" />
+        <path className="caliper-shell" d="M202 48C249 38 310 54 324 93C340 139 309 173 262 175H207L220 146H262C286 146 302 131 301 109C300 84 279 74 251 76L221 81Z" />
+        <path className="caliper-window" d="M230 89C253 82 280 88 286 108C292 129 276 140 253 139H236L244 122H257C269 122 276 116 274 106C272 97 261 94 247 97L239 100Z" />
+        <rect className="brake-pad-svg pad-inner" x="193" y="86" width="18" height="50" rx="6" />
+        <rect className="brake-pad-svg pad-outer" x="258" y="88" width="18" height="46" rx="6" />
+        <path className="caliper-bridge-line" d="M222 65C252 58 288 66 306 88M220 158C252 164 286 157 304 134" />
+        <circle className="caliper-bolt" cx="300" cy="88" r="4.5" />
+        <circle className="caliper-bolt" cx="295" cy="137" r="4.5" />
+        <circle className="caliper-bolt" cx="225" cy="63" r="3.8" />
       </g>
       <path className="brake-energy" d="M91 185H279" />
       <text className="visual-label brake-label disc-label" x="58" y="199">
-        disco
+        disco ventilado
       </text>
-      <text className="visual-label brake-label caliper-label" x="236" y="199">
+      <text className="visual-label brake-label caliper-label" x="248" y="199">
         pinça e pastilha
       </text>
     </svg>
@@ -675,7 +699,7 @@ function BrakeVisual() {
 function ServiceVisual({ type }) {
   if (type === 'battery') {
     return (
-      <svg className="service-visual battery-visual" viewBox="0 0 360 220" aria-hidden="true">
+      <svg className="service-visual battery-visual" viewBox="0 0 360 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
         <defs>
           <linearGradient id="batteryCharge" x1="0" x2="1">
             <stop offset="0%" stopColor="#19d37d" stopOpacity="0.15" />
@@ -711,7 +735,7 @@ function ServiceVisual({ type }) {
   }
 
   return (
-    <svg className="service-visual board-visual" viewBox="0 0 360 220" aria-hidden="true">
+    <svg className="service-visual board-visual" viewBox="0 0 360 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       <defs>
         <filter id="brd-glow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="3" result="b" />

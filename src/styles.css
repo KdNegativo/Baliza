@@ -2869,18 +2869,37 @@ main::after {
   }
 }
 
+.disc-backplate {
+  fill: rgba(6, 10, 8, 0.72);
+  stroke: rgba(25, 211, 125, 0.12);
+  stroke-width: 2;
+}
+
 .disc-outer {
   fill: url(#brakeDisc);
   stroke: rgba(255, 255, 255, 0.72);
   stroke-width: 4;
 }
 
+.disc-inner-dark {
+  fill: url(#brakeDarkDisc);
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 2;
+}
+
 .disc-track {
   fill: none;
   stroke: rgba(255, 255, 255, 0.48);
-  stroke-width: 18;
-  stroke-dasharray: 4 9;
-  opacity: 0.76;
+  stroke-width: 14;
+  stroke-dasharray: 8 8;
+  opacity: 0.58;
+}
+
+.disc-slot {
+  fill: rgba(225, 236, 225, 0.62);
+  opacity: 0.5;
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .disc-hole {
@@ -2920,20 +2939,25 @@ main::after {
   }
 }
 
+.caliper-shadow {
+  fill: rgba(0, 0, 0, 0.38);
+  filter: blur(4px);
+}
+
 .caliper-shell {
   fill: url(#caliperGradient);
-  stroke: rgba(255, 255, 255, 0.28);
-  stroke-width: 2;
+  stroke: rgba(225, 255, 229, 0.36);
+  stroke-width: 2.4;
 }
 
 .caliper-window {
-  fill: rgba(5, 8, 7, 0.78);
-  stroke: rgba(255, 255, 255, 0.18);
+  fill: rgba(5, 8, 7, 0.86);
+  stroke: rgba(255, 255, 255, 0.2);
   stroke-width: 2;
 }
 
 .brake-pad-svg {
-  fill: #e4ffed;
+  fill: #eaffef;
   opacity: 0.95;
   filter: drop-shadow(0 0 10px rgba(25, 211, 125, 0.55));
   transform-box: fill-box;
@@ -2962,7 +2986,7 @@ main::after {
 
 .caliper-bridge-line {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.22);
+  stroke: rgba(255, 255, 255, 0.26);
   stroke-linecap: round;
   stroke-width: 2;
 }
@@ -5857,6 +5881,45 @@ main::after {
     margin-bottom: 22px;
   }
 
+  .hero-visual {
+    display: block;
+  }
+
+  .workbench-visual {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    min-height: auto;
+  }
+
+  .bench-main {
+    min-height: clamp(354px, 92vw, 430px);
+  }
+
+  .scooter-blueprint {
+    width: 106%;
+    max-width: none;
+    height: auto;
+    max-height: none;
+    aspect-ratio: 640 / 330;
+    margin: 18px 0 12px -3%;
+  }
+
+  .service-card:first-child .service-visual,
+  .service-visual {
+    height: clamp(196px, 62vw, 224px);
+    max-height: none;
+  }
+
+  .standard-visual {
+    min-height: 132px;
+  }
+
+  .fault-points {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .service-help-line {
     padding: 10px 11px;
     font-size: 0.8rem;
@@ -5884,6 +5947,22 @@ main::after {
     display: inline-flex;
     min-height: 54px;
     border-radius: 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .bench-main {
+    min-height: 352px;
+  }
+
+  .scooter-blueprint {
+    width: 110%;
+    margin-left: -5%;
+  }
+
+  .service-card:first-child .service-visual,
+  .service-visual {
+    height: clamp(190px, 60vw, 214px);
   }
 }
 
