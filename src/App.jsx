@@ -489,14 +489,6 @@ function Hero() {
               <IconArrow />
             </a>
           </div>
-          <div className="mobile-diagnostic" aria-hidden="true">
-            <div>
-              <b>OS-014</b>
-              <span>diagnóstico ativo</span>
-            </div>
-            <i />
-            <small>pack, freio, painel e comandos</small>
-          </div>
         </div>
 
         <div className="hero-visual">

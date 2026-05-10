@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.log
+mobile-*.png
+preview-*.png
+.code-review-graph/
+uploads/
+Baliza.html
