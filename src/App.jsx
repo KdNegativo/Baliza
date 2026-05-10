@@ -147,6 +147,11 @@ function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    document.body.classList.toggle('menu-open', open)
+    return () => document.body.classList.remove('menu-open')
+  }, [open])
+
   const close = () => setOpen(false)
 
   return (
@@ -189,6 +194,7 @@ function Header() {
           type="button"
           aria-label={open ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={open}
+          aria-controls="mobile-menu"
           onClick={() => setOpen((value) => !value)}
         >
           <span />
@@ -196,7 +202,7 @@ function Header() {
         </button>
       </div>
 
-      <div className={`mobile-menu${open ? ' is-open' : ''}`}>
+      <div className={`mobile-menu${open ? ' is-open' : ''}`} id="mobile-menu">
         {navLinks.map(([label, href]) => (
           <a key={href} href={href} onClick={close}>
             {label}
@@ -992,9 +998,17 @@ function Footer() {
 
 function StickyCta() {
   const [visible, setVisible] = useState(false)
+  const [blocked, setBlocked] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 600)
+    const onScroll = () => {
+      const contact = document.getElementById('contato')
+      const nearContact = contact ? window.scrollY + window.innerHeight > contact.offsetTop + 120 : false
+
+      setVisible(window.scrollY > 600)
+      setBlocked(nearContact)
+    }
+
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -1002,7 +1016,7 @@ function StickyCta() {
 
   return (
     <a
-      className={`sticky-cta${visible ? ' is-visible' : ''}`}
+      className={`sticky-cta${visible && !blocked ? ' is-visible' : ''}`}
       href={WHATSAPP}
       target="_blank"
       rel="noreferrer"

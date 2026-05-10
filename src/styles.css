@@ -38,6 +38,10 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id] {
+  scroll-margin-top: 116px;
+}
+
 body {
   position: relative;
   min-width: 320px;
@@ -58,6 +62,10 @@ body::after {
   mix-blend-mode: overlay;
   opacity: 0.06;
   pointer-events: none;
+}
+
+body.menu-open {
+  overflow: hidden;
 }
 
 a,
@@ -4291,6 +4299,330 @@ main::after {
 
   .service-visual {
     height: 190px;
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --page-gutter: 16px;
+  }
+
+  section[id] {
+    scroll-margin-top: 88px;
+  }
+
+  body {
+    overflow-x: clip;
+  }
+
+  main {
+    overflow: clip;
+  }
+
+  main::before,
+  main::after {
+    display: none;
+  }
+
+  .site-header {
+    top: max(8px, env(safe-area-inset-top));
+    right: 10px;
+    left: 10px;
+    max-width: calc(100vw - 20px);
+    padding: 8px;
+    overflow: visible;
+    border-radius: 16px;
+  }
+
+  .site-header.is-scrolled {
+    top: max(6px, env(safe-area-inset-top));
+  }
+
+  .header-main {
+    min-height: 50px;
+  }
+
+  .brand {
+    gap: 10px;
+    min-height: 48px;
+    padding-right: 4px;
+  }
+
+  .brand-line {
+    width: 4px;
+    height: 34px;
+  }
+
+  .brand-copy strong {
+    max-width: 210px;
+    font-size: 1rem;
+    line-height: 1;
+    white-space: normal;
+  }
+
+  .brand-copy em {
+    max-width: 210px;
+    font-size: 0.7rem;
+    line-height: 1.05;
+    white-space: normal;
+  }
+
+  .menu-button {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+  }
+
+  .mobile-menu {
+    top: 76px;
+    right: 10px;
+    left: 10px;
+    z-index: 70;
+    max-height: calc(100dvh - 92px);
+    padding: 10px;
+    overflow: auto;
+    border-radius: 14px;
+  }
+
+  .mobile-menu a {
+    padding: 14px 16px;
+  }
+
+  .mobile-menu a:last-child {
+    background: linear-gradient(135deg, #7ef0a1, var(--green) 58%, #b7f45d);
+    color: var(--black);
+    text-align: center;
+  }
+
+  .hero {
+    padding: 102px 16px 48px;
+  }
+
+  .hero-shell {
+    width: 100%;
+    max-width: 100%;
+    gap: 30px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 9vw, 2.25rem);
+    line-height: 0.99;
+  }
+
+  .hero h1 span,
+  .hero h1 span:nth-child(2),
+  .hero h1 span:nth-child(3) {
+    max-width: 100%;
+    margin-left: 0;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .hero-copy p {
+    font-size: 0.98rem;
+    line-height: 1.62;
+  }
+
+  .button {
+    min-height: 50px;
+    padding: 0 14px;
+    font-size: 0.94rem;
+  }
+
+  .bench-card,
+  .service-card,
+  .standard-card,
+  .inspection-panel,
+  .report-card,
+  .responsible-card,
+  .contact-copy,
+  .map-frame {
+    border-radius: 14px;
+  }
+
+  .bench-toolbar,
+  .order-head {
+    padding: 14px 16px;
+  }
+
+  .scooter-blueprint {
+    margin-top: 12px;
+  }
+
+  .fault-points {
+    display: none;
+  }
+
+  .service-order {
+    display: none;
+  }
+
+  .section,
+  .standards,
+  .checklist-section,
+  .lab-deck {
+    padding: 64px 14px;
+  }
+
+  .lab-copy h2,
+  .standards-head h2,
+  .faq-copy h2,
+  .checklist-copy h2,
+  .section-heading h2,
+  .method-copy h2,
+  .responsible-card h2,
+  .contact-card h2 {
+    font-size: clamp(1.82rem, 8.8vw, 2.25rem);
+    line-height: 1.02;
+  }
+
+  .section-heading p,
+  .standards-head p,
+  .lab-copy p,
+  .checklist-copy p,
+  .method-copy p,
+  .responsible-card p,
+  .contact-copy p {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .lab-module,
+  .standard-card,
+  .timeline-step,
+  .check-item {
+    padding: 20px;
+  }
+
+  .standard-card {
+    min-height: 0;
+  }
+
+  .standard-visual {
+    min-height: 150px;
+    margin: 16px 0 18px;
+  }
+
+  .service-card {
+    min-height: 0;
+  }
+
+  .service-topline {
+    padding: 18px 20px 0;
+  }
+
+  .service-body {
+    padding: 0 20px 20px;
+  }
+
+  .service-card:first-child .service-visual,
+  .service-visual {
+    height: 178px;
+  }
+
+  .service-body ul {
+    gap: 8px;
+  }
+
+  .service-body li {
+    padding: 7px 9px;
+    font-size: 0.76rem;
+  }
+
+  .standards-console {
+    margin-top: 24px;
+  }
+
+  .console-top,
+  .inspection-head,
+  .faq-board-head {
+    padding: 14px 16px;
+  }
+
+  .console-flow {
+    padding: 16px;
+  }
+
+  .flow-step {
+    padding: 18px;
+  }
+
+  .inspection-grid {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .inspection-cell {
+    min-height: 74px;
+  }
+
+  .timeline-step > span,
+  .check-number,
+  .lab-module b {
+    margin-bottom: 24px;
+  }
+
+  .responsible-card,
+  .contact-copy {
+    padding: 22px 18px;
+  }
+
+  .faq-item button {
+    gap: 14px;
+    padding: 18px 14px;
+  }
+
+  .faq-item button span {
+    font-size: 0.96rem;
+  }
+
+  .faq-answer p {
+    margin: 0 14px;
+  }
+
+  .contact-card {
+    gap: 16px;
+  }
+
+  .map-frame,
+  .map-frame iframe {
+    min-height: 300px;
+  }
+
+  .sticky-cta {
+    right: 16px;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    left: 16px;
+    width: auto;
+    min-height: 50px;
+    padding: 0 14px;
+    border-radius: 12px;
+  }
+
+  .footer {
+    gap: 10px;
+    padding: 34px 16px 92px;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-copy strong,
+  .brand-copy em {
+    max-width: 176px;
+  }
+
+  .hero {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.94rem, 10.2vw, 2.22rem);
+  }
+
+  .button,
+  .sticky-cta {
+    font-size: 0.88rem;
   }
 }
 

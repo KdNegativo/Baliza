@@ -7,5 +7,7 @@ dist/
 uploads/
 Baliza.html
 preview-*.png
+mobile-*.png
+vite-mobile*.log
 
 .vercel
