@@ -610,11 +610,11 @@ function WorkbenchVisual() {
 }
 
 function BrakeVisual() {
-  const holes = Array.from({ length: 12 }, (_, index) => {
-    const angle = (Math.PI * 2 * index) / 12 + Math.PI / 12
+  const holes = Array.from({ length: 14 }, (_, index) => {
+    const angle = (Math.PI * 2 * index) / 14 + Math.PI / 14
     return {
-      cx: 132 + Math.cos(angle) * 48,
-      cy: 110 + Math.sin(angle) * 48,
+      cx: 132 + Math.cos(angle) * 47,
+      cy: 110 + Math.sin(angle) * 47,
     }
   })
   const bolts = Array.from({ length: 6 }, (_, index) => {
@@ -624,7 +624,15 @@ function BrakeVisual() {
       cy: 110 + Math.sin(angle) * 25,
     }
   })
-  const slots = Array.from({ length: 10 }, (_, index) => index * 36)
+  const slots = Array.from({ length: 12 }, (_, index) => {
+    const angle = (Math.PI * 2 * index) / 12 + Math.PI / 18
+    return {
+      x1: 132 + Math.cos(angle) * 32,
+      y1: 110 + Math.sin(angle) * 32,
+      x2: 132 + Math.cos(angle) * 56,
+      y2: 110 + Math.sin(angle) * 56,
+    }
+  })
 
   return (
     <svg className="service-visual brake-visual" viewBox="0 0 360 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
@@ -645,28 +653,26 @@ function BrakeVisual() {
           <stop offset="100%" stopColor="#12341f" />
         </linearGradient>
       </defs>
-      <path className="brake-shadow" d="M52 172C112 204 250 202 314 158" />
+      <path className="brake-shadow" d="M58 170C112 198 235 198 290 166" />
       <g className="brake-disc-svg">
-        <circle className="disc-backplate" cx="132" cy="110" r="76" />
-        <circle className="disc-outer" cx="132" cy="110" r="68" />
-        <circle className="disc-inner-dark" cx="132" cy="110" r="57" />
-        <circle className="disc-track" cx="132" cy="110" r="51" />
+        <circle className="disc-backplate" cx="132" cy="110" r="72" />
+        <circle className="disc-outer" cx="132" cy="110" r="64" />
+        <circle className="disc-inner-dark" cx="132" cy="110" r="54" />
+        <circle className="disc-track" cx="132" cy="110" r="48" />
         <g className="disc-slots">
-          {slots.map((angle) => (
-            <rect
+          {slots.map((slot) => (
+            <line
               className="disc-slot"
-              key={angle}
-              x="127"
-              y="54"
-              width="10"
-              height="32"
-              rx="5"
-              transform={`rotate(${angle} 132 110)`}
+              key={`${slot.x1}-${slot.y1}`}
+              x1={slot.x1}
+              y1={slot.y1}
+              x2={slot.x2}
+              y2={slot.y2}
             />
           ))}
         </g>
         {holes.map((hole) => (
-          <circle className="disc-hole" key={`${hole.cx}-${hole.cy}`} cx={hole.cx} cy={hole.cy} r="4.6" />
+          <circle className="disc-hole" key={`${hole.cx}-${hole.cy}`} cx={hole.cx} cy={hole.cy} r="4.1" />
         ))}
         {bolts.map((bolt) => (
           <circle className="disc-bolt" key={`${bolt.cx}-${bolt.cy}`} cx={bolt.cx} cy={bolt.cy} r="3.8" />
@@ -675,22 +681,22 @@ function BrakeVisual() {
         <circle className="disc-center" cx="132" cy="110" r="10" />
       </g>
       <g className="brake-caliper-svg">
-        <path className="caliper-shadow" d="M205 48C252 37 313 54 326 94C340 138 310 174 263 176H209L222 147H263C287 147 303 132 302 109C301 84 281 73 252 75L223 80Z" />
-        <path className="caliper-shell" d="M202 48C249 38 310 54 324 93C340 139 309 173 262 175H207L220 146H262C286 146 302 131 301 109C300 84 279 74 251 76L221 81Z" />
-        <path className="caliper-window" d="M230 89C253 82 280 88 286 108C292 129 276 140 253 139H236L244 122H257C269 122 276 116 274 106C272 97 261 94 247 97L239 100Z" />
-        <rect className="brake-pad-svg pad-inner" x="193" y="86" width="18" height="50" rx="6" />
-        <rect className="brake-pad-svg pad-outer" x="258" y="88" width="18" height="46" rx="6" />
-        <path className="caliper-bridge-line" d="M222 65C252 58 288 66 306 88M220 158C252 164 286 157 304 134" />
-        <circle className="caliper-bolt" cx="300" cy="88" r="4.5" />
-        <circle className="caliper-bolt" cx="295" cy="137" r="4.5" />
-        <circle className="caliper-bolt" cx="225" cy="63" r="3.8" />
+        <path className="caliper-shadow" d="M188 62C223 50 262 62 274 91C288 124 265 154 229 158H184L196 136H226C242 136 254 126 254 111C254 94 241 84 224 85L198 89Z" />
+        <path className="caliper-shell" d="M185 60C222 49 259 61 271 90C286 124 263 153 228 157H182L194 135H225C241 135 251 125 251 111C251 95 239 86 223 87L195 91Z" />
+        <path className="caliper-window" d="M210 91C231 86 247 94 250 110C253 126 241 136 222 136H205L213 121H222C231 121 237 117 236 110C235 103 229 100 219 102L212 104Z" />
+        <rect className="brake-pad-svg pad-inner" x="178" y="88" width="14" height="45" rx="5" />
+        <rect className="brake-pad-svg pad-outer" x="222" y="91" width="13" height="39" rx="5" />
+        <path className="caliper-bridge-line" d="M202 70C225 63 250 70 263 89M199 146C225 150 249 144 262 127" />
+        <circle className="caliper-bolt" cx="255" cy="91" r="4.2" />
+        <circle className="caliper-bolt" cx="250" cy="132" r="4.2" />
+        <circle className="caliper-bolt" cx="205" cy="72" r="3.4" />
       </g>
-      <path className="brake-energy" d="M91 185H279" />
-      <text className="visual-label brake-label disc-label" x="58" y="199">
-        disco ventilado
+      <path className="brake-energy" d="M82 184H260" />
+      <text className="visual-label brake-label disc-label" x="72" y="199">
+        disco
       </text>
-      <text className="visual-label brake-label caliper-label" x="248" y="199">
-        pinça e pastilha
+      <text className="visual-label brake-label caliper-label" x="228" y="199">
+        pinça
       </text>
     </svg>
   )

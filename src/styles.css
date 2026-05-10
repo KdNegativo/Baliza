@@ -2842,8 +2842,8 @@ main::after {
   display: block;
   overflow: hidden;
   background:
-    radial-gradient(circle at 72% 48%, rgba(25, 211, 125, 0.18), transparent 25%),
-    radial-gradient(circle at 34% 50%, rgba(255, 255, 255, 0.12), transparent 34%),
+    radial-gradient(circle at 58% 50%, rgba(25, 211, 125, 0.14), transparent 30%),
+    radial-gradient(circle at 34% 50%, rgba(255, 255, 255, 0.1), transparent 32%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 72%);
   isolation: isolate;
 }
@@ -2860,12 +2860,12 @@ main::after {
   filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.34));
   transform-box: fill-box;
   transform-origin: 50% 50%;
-  animation: discSettle 5.6s ease-in-out infinite;
+  animation: discSettle 7s ease-in-out infinite;
 }
 
 @keyframes discSettle {
   50% {
-    transform: rotate(2deg);
+    transform: rotate(1deg);
   }
 }
 
@@ -2896,10 +2896,10 @@ main::after {
 }
 
 .disc-slot {
-  fill: rgba(225, 236, 225, 0.62);
-  opacity: 0.5;
-  transform-box: fill-box;
-  transform-origin: center;
+  fill: none;
+  stroke: rgba(226, 238, 226, 0.52);
+  stroke-linecap: round;
+  stroke-width: 6;
 }
 
 .disc-hole {
@@ -2930,12 +2930,12 @@ main::after {
   filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.34));
   transform-box: fill-box;
   transform-origin: center;
-  animation: caliperSettle 3.2s ease-in-out infinite;
+  animation: caliperSettle 4.8s ease-in-out infinite;
 }
 
 @keyframes caliperSettle {
   50% {
-    transform: translateX(-3px);
+    transform: translateX(-1.5px);
   }
 }
 
@@ -2960,28 +2960,6 @@ main::after {
   fill: #eaffef;
   opacity: 0.95;
   filter: drop-shadow(0 0 10px rgba(25, 211, 125, 0.55));
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.pad-inner {
-  animation: brakePadInner 2.8s ease-in-out infinite;
-}
-
-.pad-outer {
-  animation: brakePadOuter 2.8s ease-in-out infinite;
-}
-
-@keyframes brakePadInner {
-  50% {
-    transform: translateX(3px);
-  }
-}
-
-@keyframes brakePadOuter {
-  50% {
-    transform: translateX(-3px);
-  }
 }
 
 .caliper-bridge-line {
