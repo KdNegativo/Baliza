@@ -1,0 +1,5 @@
+{
+  "installCommand": "cd baliza-react && npm ci",
+  "buildCommand": "cd baliza-react && npm run build",
+  "outputDirectory": "baliza-react/dist"
+}
