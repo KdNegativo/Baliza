@@ -684,6 +684,10 @@ main::after {
   gap: 12px;
 }
 
+.mobile-diagnostic {
+  display: none;
+}
+
 .button {
   display: inline-flex;
   align-items: center;
@@ -4602,6 +4606,628 @@ main::after {
   .footer {
     gap: 10px;
     padding: 34px 16px 92px;
+  }
+}
+
+@media (max-width: 720px) {
+  .site-header {
+    right: 12px;
+    left: 12px;
+    max-width: calc(100vw - 24px);
+    padding: 7px;
+    border-radius: 14px;
+  }
+
+  .header-main {
+    min-height: 46px;
+  }
+
+  .brand {
+    gap: 9px;
+    min-height: 46px;
+  }
+
+  .brand-line {
+    height: 30px;
+  }
+
+  .brand-copy strong {
+    font-size: 0.98rem;
+  }
+
+  .brand-copy em {
+    font-size: 0.68rem;
+  }
+
+  .menu-button {
+    width: 42px;
+    height: 42px;
+  }
+
+  .mobile-menu {
+    top: 70px;
+    gap: 7px;
+    padding: 10px;
+    background:
+      linear-gradient(180deg, rgba(25, 211, 125, 0.08), transparent 58%),
+      rgba(3, 6, 5, 0.98);
+  }
+
+  .mobile-menu a {
+    display: flex;
+    align-items: center;
+    min-height: 52px;
+    padding: 0 16px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.055);
+    font-size: 1rem;
+  }
+
+  .hero {
+    padding: 94px 16px 34px;
+  }
+
+  .hero-shell {
+    gap: 22px;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 12px;
+    font-size: 0.66rem;
+  }
+
+  .hero h1 {
+    max-width: 340px;
+    margin-bottom: 18px;
+    font-size: clamp(1.92rem, 8.7vw, 2.16rem);
+    line-height: 1;
+  }
+
+  .hero-copy p {
+    margin-bottom: 18px;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .hero-actions,
+  .contact-actions {
+    gap: 9px;
+  }
+
+  .button {
+    min-height: 46px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+  }
+
+  .workbench-visual {
+    gap: 0;
+  }
+
+  .hero-visual {
+    display: none;
+  }
+
+  .mobile-diagnostic {
+    position: relative;
+    display: grid;
+    gap: 10px;
+    padding: 15px;
+    margin-top: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(25, 211, 125, 0.18);
+    border-radius: 13px;
+    background:
+      linear-gradient(90deg, rgba(25, 211, 125, 0.12), transparent 65%),
+      rgba(255, 255, 255, 0.045);
+  }
+
+  .mobile-diagnostic::after {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 52px;
+    height: 52px;
+    border-right: 1px solid rgba(25, 211, 125, 0.38);
+    border-bottom: 1px solid rgba(25, 211, 125, 0.38);
+    content: "";
+    opacity: 0.75;
+  }
+
+  .mobile-diagnostic div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .mobile-diagnostic b,
+  .mobile-diagnostic span {
+    color: var(--green);
+    font-size: 0.72rem;
+    font-weight: 950;
+    text-transform: uppercase;
+  }
+
+  .mobile-diagnostic i {
+    height: 3px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-diagnostic i::after {
+    display: block;
+    width: 48%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--green), var(--lime));
+    box-shadow: 0 0 14px rgba(25, 211, 125, 0.55);
+    content: "";
+    animation: mobileScan 2.8s ease-in-out infinite;
+  }
+
+  @keyframes mobileScan {
+    0%,
+    100% {
+      transform: translateX(-12%);
+    }
+
+    50% {
+      transform: translateX(116%);
+    }
+  }
+
+  .mobile-diagnostic small {
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .bench-main {
+    height: 246px;
+    min-height: 246px;
+  }
+
+  .bench-toolbar {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 15px;
+    font-size: 0.66rem;
+  }
+
+  .bench-toolbar b {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .scooter-blueprint {
+    width: 112%;
+    height: 166px;
+    margin: 0 0 0 -6%;
+  }
+
+  .credibility {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    width: auto;
+    padding: 14px 16px 4px;
+    margin: 0;
+    border: 0;
+    background: #07100c;
+  }
+
+  .metric {
+    display: grid;
+    grid-template-columns: 82px 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: 14px;
+    border: 1px solid rgba(25, 211, 125, 0.14);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .metric strong {
+    font-size: 1.05rem;
+  }
+
+  .metric span {
+    max-width: none;
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
+
+  .section,
+  .standards,
+  .checklist-section,
+  .lab-deck {
+    padding: 48px 14px;
+  }
+
+  .lab-deck-inner,
+  .standards-inner,
+  .checklist-inner,
+  .faq-inner,
+  .method,
+  .responsible-card,
+  .contact-card {
+    gap: 22px;
+  }
+
+  .eyebrow,
+  .section-heading > span,
+  .method-copy > span,
+  .responsible-card span,
+  .contact-copy > span,
+  .standards-head > span,
+  .checklist-copy > span,
+  .lab-copy > span {
+    margin-bottom: 10px;
+    font-size: 0.66rem;
+  }
+
+  .lab-copy h2,
+  .standards-head h2,
+  .faq-copy h2,
+  .checklist-copy h2,
+  .section-heading h2,
+  .method-copy h2,
+  .responsible-card h2,
+  .contact-card h2 {
+    max-width: 330px;
+    margin-bottom: 14px;
+    font-size: clamp(1.64rem, 7.3vw, 1.95rem);
+    line-height: 1.05;
+  }
+
+  .section-heading p,
+  .standards-head p,
+  .lab-copy p,
+  .checklist-copy p,
+  .method-copy p,
+  .responsible-card p,
+  .contact-copy p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .lab-modules {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .lab-module {
+    min-height: 146px;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .lab-module b {
+    margin-bottom: 18px;
+    font-size: 0.82rem;
+  }
+
+  .lab-module h3 {
+    margin-bottom: 7px;
+    font-size: 1rem;
+  }
+
+  .lab-module p {
+    font-size: 0.76rem;
+    line-height: 1.42;
+  }
+
+  .standards-console {
+    display: none;
+  }
+
+  .standard-grid,
+  .service-grid {
+    display: flex;
+    width: calc(100% + 28px);
+    margin-right: -14px;
+    margin-left: -14px;
+    padding: 0 14px 10px;
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 14px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .standard-grid::-webkit-scrollbar,
+  .service-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .standard-card,
+  .service-card {
+    flex: 0 0 min(84vw, 324px);
+    scroll-snap-align: start;
+  }
+
+  .standard-card {
+    padding: 17px;
+    border-radius: 14px;
+  }
+
+  .standard-card-top {
+    margin-bottom: 10px;
+  }
+
+  .standard-visual {
+    min-height: 114px;
+    margin: 8px 0 14px;
+  }
+
+  .standard-card h3 {
+    margin-bottom: 8px;
+    font-size: 1.28rem;
+    line-height: 1.06;
+  }
+
+  .standard-card p {
+    font-size: 0.86rem;
+    line-height: 1.48;
+  }
+
+  .standard-status {
+    margin-top: 14px;
+    padding-top: 12px;
+    font-size: 0.72rem;
+  }
+
+  .service-card {
+    border-radius: 14px;
+  }
+
+  .service-topline {
+    padding: 15px 16px 0;
+  }
+
+  .service-topline span {
+    font-size: 1rem;
+  }
+
+  .service-topline b {
+    font-size: 0.62rem;
+  }
+
+  .service-card:first-child .service-visual,
+  .service-visual {
+    height: 136px;
+  }
+
+  .service-body {
+    padding: 0 16px 16px;
+  }
+
+  .service-body h3,
+  .service-card:not(:first-child) .service-body h3 {
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    line-height: 1.06;
+  }
+
+  .service-body p {
+    margin-bottom: 12px;
+    font-size: 0.84rem;
+    line-height: 1.48;
+  }
+
+  .service-body ul {
+    gap: 7px;
+  }
+
+  .service-body li {
+    padding: 6px 8px;
+    font-size: 0.68rem;
+  }
+
+  .report-card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .report-top,
+  .report-row {
+    padding: 12px 0;
+  }
+
+  .checklist-copy {
+    display: grid;
+    gap: 18px;
+  }
+
+  .inspection-panel {
+    border-radius: 14px;
+  }
+
+  .inspection-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    padding: 10px;
+  }
+
+  .inspection-cell {
+    min-height: 58px;
+    padding: 9px;
+    border-radius: 9px;
+  }
+
+  .inspection-cell b {
+    font-size: 0.52rem;
+  }
+
+  .inspection-cell em {
+    font-size: 0.74rem;
+  }
+
+  .inspection-readout {
+    padding: 12px 14px;
+  }
+
+  .checklist-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .check-item {
+    min-height: 142px;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .check-number {
+    margin-bottom: 18px;
+    font-size: 0.82rem;
+  }
+
+  .check-item h3 {
+    margin-bottom: 6px;
+    font-size: 1rem;
+    line-height: 1.08;
+  }
+
+  .check-item p {
+    font-size: 0.76rem;
+    line-height: 1.42;
+  }
+
+  .check-item > b {
+    margin-top: 12px;
+    padding: 5px 7px;
+    font-size: 0.62rem;
+  }
+
+  .timeline {
+    gap: 10px;
+  }
+
+  .timeline-step {
+    min-height: auto;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .timeline-step > span {
+    margin-bottom: 16px;
+    padding: 7px 9px;
+    font-size: 0.78rem;
+  }
+
+  .timeline-step h3 {
+    margin-bottom: 7px;
+    font-size: 1.14rem;
+  }
+
+  .timeline-step p {
+    font-size: 0.84rem;
+    line-height: 1.48;
+  }
+
+  .responsible-card,
+  .contact-copy {
+    padding: 20px 17px;
+    border-radius: 14px;
+  }
+
+  .responsible-card p + p {
+    margin-top: 12px;
+  }
+
+  .faq-precheck,
+  .faq-board {
+    border-radius: 14px;
+  }
+
+  .faq-precheck-grid {
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .faq-precheck-grid i {
+    min-height: 42px;
+    font-size: 0.72rem;
+  }
+
+  .faq-item button {
+    min-height: 62px;
+    padding: 15px 14px;
+  }
+
+  .faq-item button span {
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .contact-card h2 {
+    max-width: 310px;
+  }
+
+  .contact-copy p {
+    margin-bottom: 18px;
+  }
+
+  .map-frame,
+  .map-frame iframe {
+    min-height: 238px;
+  }
+
+  .sticky-cta {
+    min-height: 48px;
+    font-size: 0.9rem;
+  }
+
+  .hero h1 {
+    max-width: 312px;
+    font-size: clamp(1.72rem, 7.8vw, 1.96rem);
+  }
+
+  .services .section-heading h2,
+  .method-copy h2,
+  .process .section-heading h2,
+  .responsible-card h2,
+  .lab-copy h2,
+  .standards-head h2,
+  .faq-copy h2,
+  .checklist-copy h2,
+  .section-heading h2,
+  .contact-card h2 {
+    max-width: 315px;
+    font-size: clamp(1.42rem, 6.2vw, 1.72rem);
+    line-height: 1.07;
+  }
+
+  .services .section-heading,
+  .section-heading {
+    margin-bottom: 22px;
+  }
+
+  .services .section-heading p,
+  .section-heading p {
+    max-width: 330px;
+  }
+
+  .service-card:first-child .service-visual,
+  .service-visual {
+    height: 124px;
+  }
+
+  .standard-visual {
+    min-height: 104px;
+  }
+
+  .sticky-cta {
+    display: none;
   }
 }
 
