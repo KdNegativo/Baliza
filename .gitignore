@@ -6,8 +6,4 @@ dist/
 .code-review-graph/
 uploads/
 Baliza.html
-
-baliza-react/node_modules/
-baliza-react/dist/
-baliza-react/*.log
-baliza-react/preview-*.png
+preview-*.png

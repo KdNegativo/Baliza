@@ -496,19 +496,19 @@ function Hero() {
 function CredibilityBar() {
   return (
     <section className="credibility" id="bancada">
-      <div className="metric reveal">
+      <div className="metric reveal" style={{ '--i': 0 }}>
         <strong>1:1</strong>
         <span>contato direto com quem faz o reparo</span>
       </div>
-      <div className="metric reveal">
+      <div className="metric reveal" style={{ '--i': 1 }}>
         <strong>Antes</strong>
         <span>orçamento aprovado antes de trocar peça</span>
       </div>
-      <div className="metric reveal">
+      <div className="metric reveal" style={{ '--i': 2 }}>
         <strong>Bancada</strong>
         <span>diagnóstico com medição e inspeção visual</span>
       </div>
-      <div className="metric reveal">
+      <div className="metric reveal" style={{ '--i': 3 }}>
         <strong>Teste</strong>
         <span>freio, painel, carga e aceleração conferidos</span>
       </div>
@@ -530,7 +530,7 @@ function LabDeck() {
         </div>
         <div className="lab-modules">
           {labModules.map(([title, text], index) => (
-            <article className="lab-module reveal" key={title}>
+            <article className="lab-module reveal" style={{ '--i': index }} key={title}>
               <b>{String(index + 1).padStart(2, '0')}</b>
               <h3>{title}</h3>
               <p>{text}</p>
@@ -578,6 +578,87 @@ function Services() {
   )
 }
 
+function FaultDocSvg() {
+  return (
+    <svg className="fault-doc-svg" viewBox="0 0 260 132" aria-hidden="true">
+      <defs>
+        <radialGradient id="faultRadial" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#f2b84b" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#f2b84b" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Viewfinder frame */}
+      <rect className="vf-frame" x="44" y="10" width="172" height="112" rx="6" />
+
+      {/* Corner brackets */}
+      <path className="vf-bracket" d="M54 22 L54 13 L63 13" />
+      <path className="vf-bracket" d="M206 13 L215 13 L215 22" />
+      <path className="vf-bracket" d="M54 109 L54 119 L63 119" />
+      <path className="vf-bracket" d="M206 119 L215 119 L215 109" />
+
+      {/* Fault glow */}
+      <circle className="vf-fault-glow" cx="130" cy="61" r="30" />
+
+      {/* Target circle */}
+      <circle className="vf-target" cx="130" cy="61" r="24" />
+
+      {/* Crosshair arms */}
+      <line className="vf-cross" x1="130" y1="42" x2="130" y2="52" />
+      <line className="vf-cross" x1="130" y1="70" x2="130" y2="80" />
+      <line className="vf-cross" x1="111" y1="61" x2="121" y2="61" />
+      <line className="vf-cross" x1="139" y1="61" x2="149" y2="61" />
+
+      {/* Fault dot */}
+      <circle className="vf-dot" cx="130" cy="61" r="4.5" />
+
+      {/* Scan line */}
+      <line className="vf-scan" x1="44" y1="61" x2="216" y2="61" />
+
+      {/* Status label */}
+      <text className="vf-label" x="130" y="106">foto antes do orçamento</text>
+    </svg>
+  )
+}
+
+function QuoteSvg() {
+  return (
+    <svg className="quote-svg" viewBox="0 0 260 132" aria-hidden="true">
+      <defs>
+        <linearGradient id="quotePanel" x1="0" x2="1">
+          <stop offset="0%" stopColor="#07110d" />
+          <stop offset="62%" stopColor="#10251a" />
+          <stop offset="100%" stopColor="#182817" />
+        </linearGradient>
+      </defs>
+
+      <rect className="qt-doc" x="34" y="10" width="192" height="112" rx="12" />
+      <rect className="qt-header" x="46" y="22" width="168" height="22" rx="7" />
+      <text className="qt-title" x="130" y="37">ESCOPO DO REPARO</text>
+
+      <g className="qt-row qt-row-1">
+        <circle className="qt-dot" cx="56" cy="62" r="5" />
+        <path className="qt-check" d="M53 62L56 65L62 57" />
+        <text className="qt-item-label" x="72" y="64">peça definida</text>
+        <rect className="qt-status-pill" x="158" y="53" width="48" height="18" rx="9" />
+        <text className="qt-status-text" x="182" y="65">ok</text>
+      </g>
+
+      <g className="qt-row qt-row-2">
+        <circle className="qt-dot" cx="56" cy="84" r="5" />
+        <path className="qt-check" d="M53 84L56 87L62 79" />
+        <text className="qt-item-label" x="72" y="86">serviço fechado</text>
+        <rect className="qt-progress-bg" x="158" y="79" width="48" height="6" rx="3" />
+        <rect className="qt-progress" x="158" y="79" width="48" height="6" rx="3" />
+      </g>
+
+      <line className="qt-divider" x1="50" y1="101" x2="210" y2="101" />
+      <text className="qt-footer" x="130" y="115">aprovado antes de iniciar</text>
+      <path className="qt-scan" d="M42 48H218" />
+    </svg>
+  )
+}
+
 function Standards() {
   return (
     <section className="standards">
@@ -594,23 +675,37 @@ function Standards() {
               <span>OS-014</span>
               <b>fluxo validado</b>
             </div>
-            <div className="console-scan">
-              <i />
-              <i />
-              <i />
+            <div className="console-flow">
+              <span className="console-line" />
+              <span className="console-pulse" />
+              <div className="flow-step">
+                <i>01</i>
+                <b>Entrada</b>
+                <small>foto + sintoma</small>
+              </div>
+              <div className="flow-step">
+                <i>02</i>
+                <b>Bancada</b>
+                <small>medição real</small>
+              </div>
+              <div className="flow-step">
+                <i>03</i>
+                <b>Saída</b>
+                <small>teste final</small>
+              </div>
             </div>
-            <div className="console-rows">
+            <div className="console-readouts">
               <span>
-                <b>entrada</b>
-                foto + sintoma
+                <i />
+                defeito registrado
               </span>
               <span>
-                <b>bancada</b>
-                medição real
+                <i />
+                escopo aprovado
               </span>
               <span>
-                <b>saída</b>
-                teste final
+                <i />
+                entrega conferida
               </span>
             </div>
           </div>
@@ -623,7 +718,11 @@ function Standards() {
                 <span>{item.tag}</span>
               </div>
               <div className={`standard-visual standard-visual-${index + 1}`} aria-hidden="true">
-                {index === 2 ? (
+                {index === 0 ? (
+                  <FaultDocSvg />
+                ) : index === 1 ? (
+                  <QuoteSvg />
+                ) : (
                   <svg className="final-test-svg" viewBox="0 0 260 132">
                     <rect className="final-panel" x="24" y="18" width="212" height="96" rx="14" />
                     <text className="final-title" x="42" y="43">TESTE FINAL</text>
@@ -650,13 +749,6 @@ function Standards() {
                     </g>
                     <path className="final-scan" d="M32 50H228" />
                   </svg>
-                ) : (
-                  <>
-                    <span />
-                    <span />
-                    <span />
-                    <span />
-                  </>
                 )}
               </div>
               <h3>{item.title}</h3>
@@ -765,8 +857,8 @@ function Process() {
         <h2>Do primeiro contato ao teste final.</h2>
       </div>
       <div className="timeline">
-        {process.map(([number, title, text]) => (
-          <article className="timeline-step reveal" key={title}>
+        {process.map(([number, title, text], index) => (
+          <article className="timeline-step reveal" style={{ '--i': index }} key={title}>
             <span>{number}</span>
             <h3>{title}</h3>
             <p>{text}</p>
@@ -914,9 +1006,10 @@ function StickyCta() {
       href={WHATSAPP}
       target="_blank"
       rel="noreferrer"
+      aria-label="Solicitar avaliação pelo WhatsApp"
     >
       <IconWhatsapp />
-      Avaliação
+      Solicitar avaliação
     </a>
   )
 }
