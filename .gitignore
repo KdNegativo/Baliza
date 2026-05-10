@@ -7,3 +7,5 @@ dist/
 uploads/
 Baliza.html
 preview-*.png
+
+.vercel
