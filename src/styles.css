@@ -5676,6 +5676,87 @@ main::after {
   }
 }
 
+@media (max-width: 720px) {
+  section[id] {
+    scroll-margin-top: 126px;
+  }
+
+  .site-header,
+  .site-header.is-scrolled {
+    border-color: rgba(25, 211, 125, 0.32);
+    background: #050807;
+    box-shadow:
+      0 16px 34px rgba(0, 0, 0, 0.58),
+      0 0 0 1px rgba(25, 211, 125, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .standards {
+    scroll-margin-top: 126px;
+  }
+
+  .console-flow {
+    --flow-gap: 8px;
+    --flow-pad-x: 12px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .console-line,
+  .console-pulse {
+    display: none;
+  }
+
+  .flow-step {
+    min-height: 86px;
+    padding: 12px 9px 10px;
+    align-content: end;
+  }
+
+  .flow-step::before {
+    top: 12px;
+    right: 10px;
+    left: auto;
+    width: 14px;
+    height: 14px;
+    border-width: 2px;
+    transform: none;
+  }
+
+  .flow-step i {
+    top: 12px;
+    left: 10px;
+    font-size: 0.64rem;
+  }
+
+  .flow-step b {
+    max-width: calc(100% - 12px);
+    margin-bottom: 4px;
+    font-size: 0.72rem;
+    line-height: 1.08;
+  }
+
+  .flow-step small {
+    font-size: 0.58rem;
+    line-height: 1.2;
+  }
+
+  .console-readouts span {
+    min-height: 52px;
+    padding: 9px 6px;
+    gap: 5px;
+    font-size: 0.5rem;
+    line-height: 1.12;
+  }
+
+  .console-readouts span i {
+    width: 6px;
+    height: 6px;
+    flex: 0 0 6px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
