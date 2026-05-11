@@ -5998,7 +5998,10 @@ main::after {
 
   .service-card:first-child .service-visual,
   .service-visual {
-    height: clamp(196px, 62vw, 224px);
+    width: min(78%, 340px);
+    height: auto;
+    aspect-ratio: 360 / 220;
+    margin: 14px auto 10px;
     max-height: none;
   }
 
@@ -6053,7 +6056,10 @@ main::after {
 
   .service-card:first-child .service-visual,
   .service-visual {
-    height: clamp(190px, 60vw, 214px);
+    width: min(80%, 310px);
+    height: auto;
+    aspect-ratio: 360 / 220;
+    margin-top: 12px;
   }
 }
 
