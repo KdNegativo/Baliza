@@ -27,6 +27,7 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  color-scheme: only dark;
 }
 
 * {
@@ -35,6 +36,7 @@
 
 html {
   background: var(--black);
+  color-scheme: only dark;
   scroll-behavior: smooth;
 }
 
@@ -51,6 +53,7 @@ body {
     linear-gradient(90deg, rgba(25, 211, 125, 0.045) 1px, transparent 1px) 0 0 / 84px 84px,
     linear-gradient(180deg, var(--black) 0%, #08100c 620px, #0c1511 100%);
   color: #fff;
+  color-scheme: only dark;
 }
 
 body::after {
@@ -91,6 +94,17 @@ svg {
   width: 1em;
   height: 1em;
   flex: 0 0 auto;
+}
+
+.service-card,
+.bench-card,
+.service-visual,
+.service-visual *,
+.scooter-blueprint,
+.scooter-blueprint * {
+  forced-color-adjust: none;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 h1,
@@ -6061,6 +6075,28 @@ main::after {
     aspect-ratio: 360 / 220;
     margin-top: 12px;
   }
+}
+
+html.samsung-browser body::after {
+  mix-blend-mode: normal;
+  opacity: 0.035;
+}
+
+html.samsung-browser .service-card,
+html.samsung-browser .bench-main {
+  background-blend-mode: normal;
+  isolation: isolate;
+}
+
+html.samsung-browser .service-visual,
+html.samsung-browser .scooter-blueprint {
+  color-scheme: only dark;
+  transform: translateZ(0);
+}
+
+html.samsung-browser .service-visual *,
+html.samsung-browser .scooter-blueprint * {
+  color-scheme: only dark;
 }
 
 @media (prefers-reduced-motion: reduce) {
