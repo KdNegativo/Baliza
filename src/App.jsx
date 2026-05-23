@@ -968,8 +968,7 @@ function Hero() {
             <span>pelo WhatsApp.</span>
           </h1>
           <p>
-            Atendimento direto com quem faz o reparo. Envie o sintoma, uma foto ou vídeo curto e receba a orientação para
-            avaliar o próximo passo.
+            Você fala direto comigo. Envie o sintoma, uma foto ou vídeo curto e eu te ajudo a entender o próximo passo.
           </p>
           <div className="hero-actions">
             <a className="button primary" href={WHATSAPP} target="_blank" rel="noreferrer">
@@ -1000,7 +999,7 @@ function CredibilityBar() {
       </div>
       <div className="metric reveal" style={{ '--i': 1 }}>
         <strong>Rápido</strong>
-        <span>triagem inicial pelo WhatsApp com foto ou vídeo</span>
+        <span>triagem inicial com foto ou vídeo</span>
       </div>
       <div className="metric reveal" style={{ '--i': 2 }}>
         <strong>Bancada</strong>
@@ -1019,11 +1018,11 @@ function LabDeck() {
     <section className="lab-deck lead-deck" id="orcamento">
       <div className="lab-deck-inner">
         <div className="lab-copy reveal">
-          <span>Orçamento pelo WhatsApp</span>
+          <span>Primeira mensagem</span>
           <h2>Para começar, mande só o essencial.</h2>
-          <a className="button primary lead-button" href={WHATSAPP} target="_blank" rel="noreferrer">
-            <IconWhatsapp />
-            Enviar informações agora
+          <a className="button secondary lead-button" href="#servicos">
+            Ver problemas comuns
+            <IconArrow />
           </a>
         </div>
         <div className="lab-modules">
@@ -1047,7 +1046,8 @@ function Services() {
         <span>Escolha o seu caso</span>
         <h2>Qual problema o seu patinete está dando?</h2>
         <p>
-          Não precisa saber o nome da peça. Se parecer com um desses casos, mande uma foto ou vídeo pelo WhatsApp.
+          Não precisa saber o nome da peça. Se parecer com um desses casos, anote o sintoma e mande foto ou vídeo na
+          avaliação.
         </p>
       </div>
 
@@ -1075,11 +1075,11 @@ function Services() {
       <div className="service-help-cta reveal">
         <div>
           <span>Não sabe explicar o defeito?</span>
-          <strong>Sem problema. Mande um vídeo curto e ele te orienta pelo WhatsApp.</strong>
+          <strong>Sem problema. Mande um vídeo curto que eu te ajudo a entender o próximo passo.</strong>
         </div>
-        <a className="button primary" href={WHATSAPP} target="_blank" rel="noreferrer">
-          <IconWhatsapp />
-          Tirar dúvida no WhatsApp
+        <a className="button secondary" href="#orcamento">
+          Ver o que enviar
+          <IconArrow />
         </a>
       </div>
     </section>
@@ -1460,8 +1460,8 @@ function Contact() {
           <span>Contato</span>
           <h2>Solicite uma avaliação pelo WhatsApp.</h2>
           <p>
-            Atendimento em Águas Claras, Brasília - DF. Envie modelo, sintoma e uma foto ou vídeo curto para começar o
-            orçamento.
+            Atendimento em Águas Claras, Brasília - DF. Envie modelo, sintoma e uma foto ou vídeo curto para eu começar
+            o orçamento.
           </p>
           <div className="contact-actions">
             <a className="button primary" href={WHATSAPP} target="_blank" rel="noreferrer">
