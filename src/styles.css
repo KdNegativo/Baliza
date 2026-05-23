@@ -5702,11 +5702,11 @@ main::after {
   }
 
   .hero {
-    padding: 90px 14px 30px;
+    padding: 94px 14px 44px;
   }
 
   .hero-shell {
-    gap: 18px;
+    gap: 24px;
   }
 
   .hero h1 {
@@ -5720,7 +5720,7 @@ main::after {
   }
 
   .hero-visual {
-    display: none;
+    display: block;
   }
 
   .workbench-visual {
@@ -6232,7 +6232,7 @@ main::after {
   }
 
   .hero-visual {
-    display: none;
+    display: block;
   }
 
   .workbench-visual {
