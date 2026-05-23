@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
-const PHONE_DISPLAY = '(61) 9 9999-9999'
+const PHONE_DISPLAY = '+55 62 9617-6495'
 const BRAND_NAME = 'Baliza Veiculos Eletricos'
 const WHATSAPP =
-  'https://wa.me/5561999999999?text=Olá! Vim pelo site da Baliza Veiculos Eletricos e quero avaliar meu patinete.'
+  'https://wa.me/556296176495?text=Olá! Vim pelo site da Baliza Veiculos Eletricos e quero avaliar meu patinete.'
 
 const MAPS_COORDS = '-15.8380955,-48.0328055'
 const MAPS_DIR = `https://www.google.com/maps/dir/?api=1&destination=${MAPS_COORDS}`
