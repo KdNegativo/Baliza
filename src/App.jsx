@@ -268,6 +268,78 @@ function useHashScroll() {
   }, [])
 }
 
+function useMotionTelemetry() {
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    if (reduceMotion.matches) return undefined
+
+    const root = document.documentElement
+    let pointerX = 0.5
+    let pointerY = 0.42
+    let motionFrame = 0
+    let scrollFrame = 0
+
+    const writeScrollProgress = () => {
+      scrollFrame = 0
+      const maxScroll = root.scrollHeight - window.innerHeight
+      const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0
+      root.style.setProperty('--scroll-progress', progress.toFixed(4))
+    }
+
+    const queueScrollProgress = () => {
+      if (!scrollFrame) scrollFrame = window.requestAnimationFrame(writeScrollProgress)
+    }
+
+    const writeMotion = () => {
+      motionFrame = 0
+
+      const x = pointerX - 0.5
+      const y = pointerY - 0.5
+
+      root.style.setProperty('--motion-shift-x', `${(x * 18).toFixed(2)}px`)
+      root.style.setProperty('--motion-shift-y', `${(y * 14).toFixed(2)}px`)
+      root.style.setProperty('--motion-soft-x', `${(x * 8).toFixed(2)}px`)
+      root.style.setProperty('--motion-soft-y', `${(y * 6).toFixed(2)}px`)
+      root.style.setProperty('--hero-tilt-x', `${(-y * 4).toFixed(2)}deg`)
+      root.style.setProperty('--hero-tilt-y', `${(x * 5).toFixed(2)}deg`)
+    }
+
+    const queueMotion = () => {
+      if (!motionFrame) motionFrame = window.requestAnimationFrame(writeMotion)
+    }
+
+    const onPointerMove = (event) => {
+      pointerX = Math.min(1, Math.max(0, event.clientX / window.innerWidth))
+      pointerY = Math.min(1, Math.max(0, event.clientY / window.innerHeight))
+      queueMotion()
+    }
+
+    writeScrollProgress()
+    writeMotion()
+
+    window.addEventListener('pointermove', onPointerMove, { passive: true })
+    window.addEventListener('scroll', queueScrollProgress, { passive: true })
+    window.addEventListener('resize', queueScrollProgress)
+
+    return () => {
+      window.cancelAnimationFrame(motionFrame)
+      window.cancelAnimationFrame(scrollFrame)
+      window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('scroll', queueScrollProgress)
+      window.removeEventListener('resize', queueScrollProgress)
+
+      root.style.removeProperty('--scroll-progress')
+      root.style.removeProperty('--motion-shift-x')
+      root.style.removeProperty('--motion-shift-y')
+      root.style.removeProperty('--motion-soft-x')
+      root.style.removeProperty('--motion-soft-y')
+      root.style.removeProperty('--hero-tilt-x')
+      root.style.removeProperty('--hero-tilt-y')
+    }
+  }, [])
+}
+
 function ScooterBlueprint() {
   return (
     <svg className="scooter-blueprint" viewBox="0 0 640 330" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
@@ -949,10 +1021,6 @@ function LabDeck() {
         <div className="lab-copy reveal">
           <span>Orçamento pelo WhatsApp</span>
           <h2>Para começar, mande só o essencial.</h2>
-          <p>
-            A ideia é tirar o cliente da dúvida sem jogar informação demais na tela. Com três coisas simples já dá para
-            orientar se vale levar para avaliação.
-          </p>
           <a className="button primary lead-button" href={WHATSAPP} target="_blank" rel="noreferrer">
             <IconWhatsapp />
             Enviar informações agora
@@ -1470,6 +1538,7 @@ function StickyCta() {
 export default function App() {
   useRevealMotion()
   useHashScroll()
+  useMotionTelemetry()
 
   return (
     <div>
